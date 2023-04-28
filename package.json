@@ -6,8 +6,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.16.0",
+    "@types/react": "18.0.38",
+    "sass": "^1.62.0",
+    "typescript": "5.0.4"
   }
 }
