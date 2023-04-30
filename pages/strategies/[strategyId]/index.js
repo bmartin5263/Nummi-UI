@@ -5,11 +5,11 @@ import React from 'react'
 
 function StrategyPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>Strategy</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 

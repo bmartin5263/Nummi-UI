@@ -5,11 +5,11 @@ import React from 'react'
 
 function RegisterPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>Register</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 

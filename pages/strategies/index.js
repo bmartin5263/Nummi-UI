@@ -5,12 +5,12 @@ import React from 'react'
 
 function StrategiesPage() {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Strategies</title>
       </Head>
       <p>Strategies</p>
-    </Layout>
+    </>
   );
 }
 

@@ -5,11 +5,11 @@ import React from 'react'
 
 function BotsPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>Bots</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 

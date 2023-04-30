@@ -5,12 +5,12 @@ import React from 'react'
 
 function UserPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>User</title>
       </Head>
       <p>User</p>
-    </Layout>
+    </>
   );
 }
 

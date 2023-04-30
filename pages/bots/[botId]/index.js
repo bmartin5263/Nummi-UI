@@ -5,11 +5,11 @@ import utilStyles from '../../styles/utils.module.css'
 
 function BotPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>Bot</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 

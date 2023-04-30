@@ -5,11 +5,11 @@ import React from 'react'
 
 function TradePage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>Trade</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 

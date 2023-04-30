@@ -5,11 +5,11 @@ import React from 'react'
 
 function NewSimulationPage() {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>NewSimulation</title>
       </Head>
-    </Layout>
+    </>
   );
 }
 
