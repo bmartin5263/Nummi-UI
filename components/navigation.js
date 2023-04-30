@@ -9,19 +9,16 @@ function Navigation() {
   }
   return (
     <nav>
-      <div className='nav-section-left'>
-        <Link href="/" className="logo">Nummi</Link>
+      <Link href="/" className="left logo">Nummi</Link>
+      <Link href="/strategies" className='left link active-page'>Strategies</Link>
+      <Link href="/trading" className='left link'>Trading</Link>
+      <Link href="/bots" className='left link'>Bots</Link>
+      <Link href="/simulations" className='left link'>Simulations</Link>
+      <div id='toggle-dark-mode' className='right link-image-button' onClick={toggleDarkMode}>
+        <img className='link-image' src="images/sun.png"/>
       </div>
-      <div className='nav-section-left'>
-        <Link href="/strategies" className='active-page'>Strategies</Link>
-        <Link href="/trading">Trading</Link>
-        <Link href="/bots">Bots</Link>
-        <Link href="/simulations">Simulations</Link>
-        <button onClick={toggleDarkMode}>Hello</button>
-      </div>
-      <div className='nav-section-right'>
-        <Link href="/strategies">Strategies</Link>
-      </div>
+      <Link href="/login" className='right link-button link-button-primary'>Login</Link>
+      <Link href="/register" className='right link-button'>Register</Link>
     </nav>
   );
 }
