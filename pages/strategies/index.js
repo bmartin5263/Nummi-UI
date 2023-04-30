@@ -5,7 +5,7 @@ import React from 'react'
 
 function StrategiesPage() {
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>Strategies</title>
       </Head>

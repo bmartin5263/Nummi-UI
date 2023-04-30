@@ -1,1 +1,23 @@
-$primary-color-light: #0FD68DFF;
+$nummi-green: #0FD68D;
+
+$white-gray: #f7f7f7;
+$lightest-gray: #E6E6E6;
+$light-gray: #B3B3B3;
+$gray: #999999;
+$dark-gray: #808080;
+$darkest-gray: #333333;
+$black-gray: #1A1A1A;
+
+$primary-light: $nummi-green;
+$primary-hover-light: #10EB9B;
+$primary-active-light: #0EC280;
+
+$primary-dark: $primary-active-light;
+$primary-hover-dark: $primary-light;
+$primary-active-dark: $primary-active-light;
+
+
+$button-enabled-light: $gray;
+$button-hover-light: $light-gray;
+$button-active-light: $dark-gray;
+$button-disabled-light: $lightest-gray;

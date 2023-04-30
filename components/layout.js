@@ -1,27 +1,27 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import styles from './layout.module.scss';
-import Link from 'next/link';
 import Navigation from './navigation';
+import { useState } from "react";
+import ThemeContext from '../components/themeContext'
 
 const name = 'Brandon';
 export const siteTitle = 'Next.js Sample Website';
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
+    const [darkMode, doSetDarkMode] = useState(false);
+  
+    const setDarkMode = (value) => {
+      console.log("doSetDarkMode " + value);
+      doSetDarkMode(value)
+    }
     return (
-        <div className={styles.container}>
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <header>
-                <Navigation/>
-            </header>
-            <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                    <Link href="/">← Back to home</Link>
+        <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+            <div className={darkMode ? "dark body" : "body"}>
+                <div className="content">
+                    <Head><link rel="icon" href="/favicon.ico" /></Head>
+                    <Navigation />
+                    <main>{children}</main>
                 </div>
-            )}
-        </div>
+            </div>
+        </ThemeContext.Provider>
     );
 }
