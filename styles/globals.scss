@@ -114,6 +114,11 @@ a {
 .dark .active-page {
   color: #ffffff;
   background-color: variables.$primary-dark;
+  transition-duration: 0.2s;
+}
+
+.dark .active-page:hover {
+  background-color: variables.$primary-hover-dark;
 }
 
 .link-button {
@@ -154,6 +159,10 @@ a {
   transition-duration: 0.0s;
 }
 
+.dark .link-button-primary {
+  background-color: variables.$primary-hover-dark;
+}
+
 .link-image-button {
   font-weight: bold;
   background-color: variables.$button-enabled-light;
@@ -172,6 +181,137 @@ a {
   height: auto;
   text-align: center;
   filter: invert(1);
+}
+
+/*
+ * =============================
+ * --------- BANNER ------------
+ * =============================
+ */
+
+ .banner {
+  width: 100%;
+  height: 3em;
+  line-height: 3em;
+  vertical-align: middle;
+  text-align: center;
+  font-family: Avenir;
+  transition-duration: 0.3s;
+ }
+
+ .banner-info {
+  background-color: #CCE5FF;
+  color: #004C99;
+ }
+
+ .dark .banner-info {
+  background-color: #003265;
+  color: #8dc4ff;
+ }
+
+ .banner-error {
+  background-color: #FFCCCC;
+  color: #660000;
+ }
+
+ .dark .banner-error {
+  background-color: #660000;
+  color: #ffacac;
+ }
+
+ /*
+ * =============================
+ * ------- CENTER BOX ----------
+ * =============================
+ */
+
+ .center-box {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3em;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  background-color: variables.$white-gray;
+  display: block;
+ }
+
+ .dark .center-box {
+  background-color: variables.$darkest-gray;
+ }
+
+.center-box h1 {
+  padding-top: .5em;
+  padding-bottom: .2em;
+  font-family: Helvetica, monospace;
+  text-align: center;
+  transition-duration: 0.4s;
+  color: #666666;
+}
+
+.dark .center-box h1 {
+  color: variables.$lightest-gray;
+}
+
+.center-box input {
+  width: 70%;
+  margin: auto auto 24px;
+  display: block;
+  border-radius: 3px;
+  font-size: 14px;
+  border: 1px solid #919191;
+  color: black;
+  padding: 12px 4px;
+  transition-duration: 0.4s;
+}
+
+.center-box span {
+  margin-left: 5.7em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+
+.dark .center-box input {
+  background-color: #1A1A1A;
+  color: white;
+}
+
+.center-box button {
+  background-color: variables.$primary-light;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.2s;
+  width: 70%;
+  margin: auto auto 16px;
+  display: block;
+  padding: 12px 4px;
+  border-radius: 3px;
+}
+
+.dark .center-box button {
+  background-color: variables.$primary-hover-dark;;
+}
+
+.center-box button:hover {
+  background-color: #10E697;
+}
+
+.center-box button:active {
+  background-color: #18c07f;
+  transition-duration: 0.0s;
+}
+
+.center-box-link {
+  color: #0FD68D;
+  display: block;
+  margin-right: 5.6em;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /*
