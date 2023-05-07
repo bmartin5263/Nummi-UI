@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const ThemeContext = createContext({
   darkMode: false,
-  setDarkMode: (value) => {}
+  toggleDarkMode: () => {}
 });
 
 export default ThemeContext;

@@ -21,7 +21,7 @@ function LoginPage() {
         <title>Login to Nummi</title>
       </Head>
       <Banner className="banner-error" text="Uh Oh... We are experiencing technical difficulties"/>
-      <CenterBox>
+      <div className='center-box'>
         <h1 id="center-box-title">Login</h1>
         <div className='row-break'></div>
         <div className='grp'>
@@ -40,7 +40,7 @@ function LoginPage() {
           <Link href="/register" className='inline'>Register</Link>
           <Link href="/forgot-password" id='forgot-password' className='inline'>Forgot Password</Link>
         </div>
-      </CenterBox>
+      </div>
     </>
   );
 }

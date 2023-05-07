@@ -1,4 +1,4 @@
-@use 'variables';
+@use 'variables' as *;
 
 * { 
   margin: 0; 
@@ -14,47 +14,52 @@ body {
   Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 16px;
   margin: 0;
+  height: 100%;
 }
 
-.body {
+body {
   transition-duration: 0.4s;
-  padding-bottom: 100%;
-  color: variables.$darkest-gray;
+  color: $background-gray;
 }
 
-.dark.body {
+body.dark {
+  background-color: $background-gray;
   color: white;
-  background-color: variables.$background-gray;
 }
 
 .content {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 85%;
+  margin: 0 auto;
 }
 
 h1 {
   font-family: Helvetica, monospace;
   transition-duration: 0.4s;
-  color: variables.$dark-gray;
+  color: $dark-gray;
+}
+
+h1 {
+  font-family: Helvetica, monospace;
+  transition-duration: 0.4s;
+  color: $dark-gray;
 }
 
 a.inline {
   text-decoration: none;
-  color: variables.$darker-green;
+  color: $darker-green;
 }
 
 a.inline:hover {
   text-decoration: underline;
-  color: variables.$dark-green;
+  color: $dark-green;
 }
 
 .dark a.inline {
-  color: variables.$dark-green;
+  color: $dark-green;
 }
 
 .dark a.inline:hover {
-  color: variables.$green;
+  color: $green;
 }
 
 input {
@@ -74,6 +79,15 @@ input {
 .dark input {
   background-color: #1A1A1A;
   color: white;
+}
+
+nav {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: .5em;
+  // background-color: #003265;
 }
 
 /*
@@ -97,7 +111,7 @@ input {
 
 .button {
   font-weight: bold;
-  background-color: variables.$button-enabled-light;
+  background-color: $button-enabled-light;
   color: #ffffff;
   padding: 10px 32px;
   text-align: center;
@@ -108,32 +122,32 @@ input {
 }
 
 .button:hover {
-  background-color: variables.$button-hover-light;
+  background-color: $button-hover-light;
 }
 
 .button:active {
-  background-color: variables.$button-active-light;
+  background-color: $button-active-light;
   transition-duration: 0.0s;
 }
 
 // Primary Button
 
 .button-primary {
-  background-color: variables.$button-primary-enabled-light;
+  background-color: $button-primary-enabled-light;
 }
 
 .button-primary:hover {
-  background-color: variables.$button-primary-hover-light;
+  background-color: $button-primary-hover-light;
 }
 
 .button-primary:active {
-  background-color: variables.$button-primary-active-light;
+  background-color: $button-primary-active-light;
   transition-duration: 0.0s;
 }
 
 .button:disabled,
 .button[disabled]{
-  background-color: variables.$button-primary-disabled-light;
+  background-color: $button-primary-disabled-light;
   cursor: not-allowed;
 }
 
@@ -143,116 +157,25 @@ input {
 // Primary Button
 
 .dark .button-primary {
-  background-color: variables.$button-primary-enabled-dark;
+  background-color: $button-primary-enabled-dark;
 }
 
 .dark .button-primary {
-  background-color: variables.$button-primary-enabled-dark;
+  background-color: $button-primary-enabled-dark;
 }
 
 .dark .button-primary:hover {
-  background-color: variables.$button-primary-hover-dark;
+  background-color: $button-primary-hover-dark;
 }
 
 .dark .button-primary:active {
-  background-color: variables.$button-primary-active-dark;
+  background-color: $button-primary-active-dark;
 }
 
 .dark .button:disabled,
 .dark .button[disabled]{
-  background-color: variables.$button-primary-disabled-dark;
-  color: variables.$dark-gray;
-}
-
-/*
- * =============================
- * ------- NAVIGATION ----------
- * =============================
- */
-
-nav {
-  display: flex;
-  margin: auto;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  margin-bottom: .5em;
-  // background-color: #003265;
-}
-
-#toggle-dark-mode-button {
-  margin-left: 1em;
-  margin-top: .8em;
-  height: 2.4em;
-}
-
-#toggle-dark-mode-img {
-  height: 2.4em;
-  width: 2.4em;
-}
-
-#login-nav-button {
-  margin-left: auto;
-}
-
-.link {
-  color: #808080;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 8px;
-  font-weight: bold;
-  padding: .6em 1.3em;
-  transition-duration: 0s;
-  margin-left: 1em;
-  margin-top: .8em;
-}
-
-.link:hover {
-  border-radius: 0;
-  border-bottom: 3px solid variables.$primary-light;
-  margin-bottom: -3px;
-}
-
-.link:active {
-  transition-duration: 0.2s;
-  color: variables.$primary-light;
-  background-color: rgba(0,0,0,0);
-}
-
-.dark .link {
-  color: variables.$lightest-gray;
-}
-
-.dark .link:hover {
-  border-color: variables.$primary-hover-dark;
-}
-
-.dark .link:active {
-    color: variables.$primary-light;
-    background-color: rgba(0,0,0,0);
-}
-
-.active-page {
-  color: #ffffff;
-  background-color: #0FD68D;
-  transition-duration: 0.2s;
-}
-
-.active-page:hover {
-  background-color: variables.$primary-hover-light;
-  border-radius: 8px;
-  border: 0;
-  color: #FFFFFF;
-  margin-bottom: 0px;
-}
-
-.dark .active-page {
-  color: #ffffff;
-  background-color: variables.$primary-dark;
-  transition-duration: 0.2s;
-}
-
-.dark .active-page:hover {
-  background-color: variables.$primary-hover-dark;
+  background-color: $button-primary-disabled-dark;
+  color: $dark-gray;
 }
 
 /*
@@ -302,12 +225,11 @@ nav {
   display: flex;
   flex-wrap: wrap;
   width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding-bottom: 1em;
   border-radius: 12px;
   transition-duration: 0.4s;
-  background-color: variables.$white-gray;
+  background-color: $white-gray;
 }
 
 #center-box-title {
@@ -321,11 +243,11 @@ nav {
 }
 
 .dark .center-box {
-  background-color: variables.$division-gray;
+  background-color: $division-gray;
 }
 
 .dark .center-box h1 {
-  color: variables.$lightest-gray;
+  color: $lightest-gray;
 }
 
 .center-box input {
@@ -367,7 +289,7 @@ nav {
   transition-duration: .2s;
   position: relative;
   top: .7em;
-  color: variables.$lighter-gray;
+  color: $lighter-gray;
   opacity: 0%;
 }
 
@@ -382,64 +304,4 @@ nav {
 
 .hidden-text-bad {
   color: lightcoral;
-}
-
-/*
- * =============================
- * ---------- LOGO -------------
- * =============================
- */
-
-.logo {
-  margin: 0;
-  padding: 0;
-  margin-left: -.1em;
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  font-size: 48px;
-  color: variables.$primary-light;
-  transition-duration: 0.2s;
-}
-
-.logo:link {
-  text-decoration: none;
-}
-
-.logo:visited {
-  text-decoration: none;
-}
-
-.logo:hover {
-  text-decoration: none;
-  border: none;
-  color: variables.$primary-hover-light;
-}
-
-.logo:active {
-  text-decoration: none;
-}
-
-.dark .logo {
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  font-size: 48px;
-  color: variables.$primary-dark;
-}
-
-.dark .logo:link {
-  text-decoration: none;
-}
-
-.dark .logo:visited {
-  text-decoration: none;
-}
-
-.dark .logo:hover {
-  text-decoration: none;
-  border: none;
-  color: variables.$primary-hover-dark;
-}
-
-.dark .logo:active {
-  text-decoration: none;
 }
