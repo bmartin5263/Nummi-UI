@@ -12,16 +12,16 @@ function Navigation() {
 
   return (
     <nav>
-      <Link href="/" className="left logo">Nummi</Link>
-      {createLink("/strategies", "Strategies", "left", router.pathname)}
-      {createLink("/trading", "Trading", "left", router.pathname)}
-      {createLink("/bots", "Bots", "left", router.pathname)}
-      {createLink("/simulations", "Simulations", "left", router.pathname)}
-      <div id='toggle-dark-mode' className='right link-image-button' onClick={toggleDarkMode}>
-        <img className='link-image' src={darkMode ? "images/sun.png" : "images/moon.png"}/>
+      <Link href="/" className="logo">Nummi</Link>
+      {createLink("/strategies", "Strategies", "", router.pathname)}
+      {createLink("/trading", "Trading", "", router.pathname)}
+      {createLink("/bots", "Bots", "", router.pathname)}
+      {createLink("/simulations", "Simulations", "", router.pathname)}
+      <Link href="/login" id="login-nav-button" className='button button-primary'>Login</Link>
+      <Link href="/register" className='button'>Register</Link>
+      <div id='toggle-dark-mode-button' className='button' onClick={toggleDarkMode}>
+        <img id='toggle-dark-mode-img' src={darkMode ? "images/sun2.png" : "images/moon2.png"}/>
       </div>
-      <Link href="/login" className='right link-button link-button-primary'>Login</Link>
-      <Link href="/register" className='right link-button'>Register</Link>
     </nav>
   );
 }

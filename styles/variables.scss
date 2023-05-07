@@ -1,22 +1,71 @@
-$nummi-green: #0FD68D;
+/*
+* Basic Colors
+*/
 
 $white-gray: #f7f7f7;
 $lightest-gray: #E6E6E6;
+$lighter-gray: #CCCCCC;
 $light-gray: #B3B3B3;
 $gray: #999999;
 $dark-gray: #808080;
-$darkest-gray: #333333;
-$black-gray: #1A1A1A;
+$darker-gray: #666666;
+$darkest-gray: #444444;
+$division-gray: #333333;
+$background-gray: #1A1A1A;
 
-$primary-light: $nummi-green;
-$primary-hover-light: #10EB9B;
-$primary-active-light: #0ec280;
+$lighter-green: #2fffb3;
+$light-green: #10E697;
+$green: #0ECF88;
+$dark-green: #0DBA7A;
+$darker-green: #0B9C66;
+$darkest-green: #08784E;
 
-$primary-dark: #197754;
-$primary-hover-dark: #24ae7c;
-$primary-active-dark: cyan;
+// Primary Colors
 
-$button-enabled-light: $gray;
-$button-hover-light: $light-gray;
-$button-active-light: $dark-gray;
-$button-disabled-light: $lightest-gray;
+$normal-light: $gray;
+$normal-hover-light: $light-gray;
+$normal-active-light: $dark-gray;
+$normal-disabled-light: $lightest-gray;
+
+$normal-dark: $dark-gray;
+$normal-hover-dark: $gray;
+$normal-active-dark: $darker-gray;
+$normal-disabled-dark: $darkest-gray;
+
+$primary-light: $green;
+$primary-hover-light: $light-green;
+$primary-active-light: $dark-green;
+
+$primary-dark: $darker-green;
+$primary-hover-dark: $dark-green;
+$primary-active-dark: $darkest-green;
+
+$primary-dark: $darker-green;
+
+/*
+ * Button Colors
+ */
+
+// Basic Light
+$button-enabled-light: $normal-light;
+$button-hover-light: $normal-hover-light;
+$button-active-light: $normal-active-light;
+$button-disabled-light: $normal-disabled-light;
+
+// Primary Light
+$button-primary-enabled-light: $primary-light;
+$button-primary-hover-light: $primary-hover-light;
+$button-primary-active-light: $primary-active-light;
+$button-primary-disabled-light: $normal-disabled-light;
+
+// Basic Dark
+$button-enabled-dark: $normal-dark;
+$button-hover-dark: $normal-hover-dark;
+$button-active-dark: $normal-active-dark;
+$button-disabled-dark: $normal-disabled-dark;
+
+// Primary Dark
+$button-primary-enabled-dark: $primary-dark;
+$button-primary-hover-dark: $primary-hover-dark;
+$button-primary-active-dark: $primary-active-dark;
+$button-primary-disabled-dark: $normal-disabled-dark;
