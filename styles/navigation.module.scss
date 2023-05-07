@@ -24,7 +24,8 @@
   border-radius: 8px;
   font-weight: bold;
   padding: .6em 1.3em;
-  transition-duration: 0s;
+  transition: background-color .2s;
+  transition: color .2s;
   margin-left: 1em;
   margin-top: .8em;
 }
@@ -36,28 +37,28 @@
 }
 
 .link:active {
-  transition-duration: 0.2s;
+  transition: background-color 0;
   color: $primary-light;
   background-color: rgba(0,0,0,0);
 }
 
-.dark .link {
+:global(.dark) .link {
   color: $lightest-gray;
 }
 
-.dark .link:hover {
+:global(.dark) .link:hover {
   border-color: $primary-hover-dark;
 }
 
-.dark .link:active {
+:global(.dark) .link:active {
     color: $primary-light;
     background-color: rgba(0,0,0,0);
 }
 
 .activePage {
   color: #ffffff;
-  background-color: #0FD68D;
-  transition-duration: 0.2s;
+  background-color: $primary-light;
+  transition: background-color .2s;
 }
 
 .activePage:hover {
@@ -68,14 +69,14 @@
   margin-bottom: 0px;
 }
 
-.dark .activePage {
+:global(.dark) .activePage {
   color: #ffffff;
-  background-color: $primary-dark;
+  background-color: $darkest-green;
   transition-duration: 0.2s;
 }
 
-.dark .activePage:hover {
-  background-color: $primary-hover-dark;
+:global(.dark) .activePage:hover {
+  background-color: $darker-green;
 }
 
 .logo {
@@ -107,27 +108,27 @@
   text-decoration: none;
 }
 
-.dark .logo {
+:global(.dark) .logo {
   font-family: Verdana, sans-serif;
   font-weight: bold;
   font-size: 48px;
   color: $primary-dark;
 }
 
-.dark .logo:link {
+:global(.dark) .logo:link {
   text-decoration: none;
 }
 
-.dark .logo:visited {
+:global(.dark) .logo:visited {
   text-decoration: none;
 }
 
-.dark .logo:hover {
+:global(.dark) .logo:hover {
   text-decoration: none;
   border: none;
   color: $primary-hover-dark;
 }
 
-.dark .logo:active {
+:global(.dark) .logo:active {
   text-decoration: none;
 }

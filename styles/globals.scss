@@ -28,6 +28,7 @@ body.dark {
 }
 
 .content {
+  transition: width .3s;
   width: 85%;
   margin: 0 auto;
 }
@@ -304,4 +305,12 @@ nav {
 
 .hidden-text-bad {
   color: lightcoral;
+}
+
+@media screen and (max-width: 1200px) {
+  .content {
+    transition: width .2s;
+    width: 95%;
+    margin: 0 auto;
+  }
 }
