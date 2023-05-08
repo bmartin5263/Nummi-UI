@@ -6,10 +6,7 @@ import Banner from '../../components/banner';
 import Link from 'next/link';
 import TextField from '../../components/textField';
 import styles from 'styles/login.module.scss';
-
-function RowBreak({height}) {
-  return <div className='row-break' style={{'height': height}}/>;
-}
+import RowBreak from '../../components/rowBreak';
 
 function LoginPage() {
   return (
@@ -27,7 +24,7 @@ function LoginPage() {
         <button id={styles.loginButton} class="button button-primary">Login</button>
         <RowBreak height={"1.8em"}/>
         <div className={styles.linkGroup}>
-          <Link href="/register" id={styles.registerButton} className='inline'>Register</Link>
+          <Link href="/register" id={styles.registerButton} className='inline'>Create an Account</Link>
           <Link href="/forgot-password" id={styles.forgotPasswordButton} className='inline'>Forgot Password</Link>
         </div>
         <RowBreak/>

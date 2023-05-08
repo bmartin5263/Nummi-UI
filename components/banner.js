@@ -3,7 +3,7 @@ import ThemeContext from './themeContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/router'
 
-function Banner({className, text}) {
+function Banner({className, children}) {
   return (
     <>
       {/* <div className='banner banner-info'>
@@ -11,7 +11,7 @@ function Banner({className, text}) {
       </div>
       <br/> */}
       <div className={'banner ' + className}>
-        {text}
+        {children}
       </div>
     </>
   )
