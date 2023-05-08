@@ -1,0 +1,45 @@
+@use 'variables' as *;
+
+.headerText {
+  font-size: .8em;
+  margin-bottom: .3em;
+  margin-left: .3em;
+  transition-duration: .2s;
+  position: relative;
+  top: 0;
+}
+
+.labelText {
+  color: $darkest-gray;
+}
+
+:global(.dark) .labelText {
+  color: $lightest-gray;
+}
+
+.errorText {
+  color: $red;
+  margin-left: auto;
+}
+
+.textBox {
+  border-color: $dark-gray;
+  width: 100%;
+}
+
+:global(.dark) .textBox {
+  border-color: $light-gray;
+}
+
+.textBoxError {
+  border-color: $red;
+}
+
+.textBoxError {
+  border-color: $light-red;
+}
+
+.headerTextHidden {
+  top: .6em;
+  opacity: 0%;
+}

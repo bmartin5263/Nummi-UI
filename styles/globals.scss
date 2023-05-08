@@ -39,10 +39,8 @@ h1 {
   color: $dark-gray;
 }
 
-h1 {
-  font-family: Helvetica, monospace;
-  transition-duration: 0.4s;
-  color: $dark-gray;
+.dark h1 {
+  color: $lightest-gray;
 }
 
 a.inline {
@@ -64,17 +62,14 @@ a.inline:hover {
 }
 
 input {
-  font-size: 16px;
-}
-
-input {
   display: block;
-  border-radius: .3em;
+  border-radius: .2em;
   font-size: 16px;
   border: 1px solid #919191;
   color: black;
-  padding: 12px 4px;
+  padding: .5em .3em;
   transition-duration: 0.4s;
+  width: 200px;
 }
 
 .dark input {
@@ -89,6 +84,10 @@ nav {
   align-items: flex-end;
   margin-bottom: .5em;
   // background-color: #003265;
+}
+
+.row-break {
+  flex-basis: 100%;
 }
 
 /*
@@ -218,97 +217,47 @@ nav {
 
  /*
  * =============================
- * ------- CENTER BOX ----------
+ * --------- FORM BOX ----------
  * =============================
  */
 
-.center-box {
+ .form-box {
   display: flex;
   flex-wrap: wrap;
+
   width: 50%;
   margin: 0 auto;
-  padding-bottom: 1em;
   border-radius: 12px;
   transition-duration: 0.4s;
   background-color: $white-gray;
-}
+ }
 
-#center-box-title {
+// .form-box .TextField {
+//   margin: 0 auto;
+//   width: 70%;
+//  }
+
+ .form-box h1 {
+  width: 100%; 
   text-align: center;
-  margin: .4em auto;
-}
+ }
 
-.row-break {
-  flex-basis: 100%;
-  height: 10;
-}
 
-.dark .center-box {
+.dark .form-box {
   background-color: $division-gray;
 }
 
-.dark .center-box h1 {
-  color: $lightest-gray;
-}
-
-.center-box input {
-  width: 70%;
-  margin: 0em auto .5em auto;
-}
-
-.dark .center-box input {
-  background-color: #1A1A1A;
-  color: white;
-}
-
-#do-login-button {
-  width: 70%;
-  margin: .5em auto;
-}
-
-#link-group {
-  margin: .5em auto;
-  width: 70%;
-  display: flex;
-}
-
-#forgot-password {
-  margin-left: auto;
-}
-
-.grp {
-  display: flex;
-  width: 70%;
-  margin: 0 auto;
-}
-
-.hidden-text {
-  font-size: .8em;
-  transition-duration: .2s;
-  margin-bottom: .3em;
-  margin-left: .3em;
-  transition-duration: .2s;
-  position: relative;
-  top: .7em;
-  color: $lighter-gray;
-  opacity: 0%;
-}
-
-.left-margin {
-  margin-left: auto;
-}
-
-.hidden-text-shown {
-  top: 0;
-  opacity: 100%;
-}
-
-.hidden-text-bad {
-  color: lightcoral;
-}
 
 @media screen and (max-width: 1200px) {
   .content {
+    transition: width .2s;
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .form-box {
     transition: width .2s;
     width: 95%;
     margin: 0 auto;
