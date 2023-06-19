@@ -6,7 +6,7 @@ function TradePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://api.nummi.io/dev/anon-strings')
+    axios.get(process.env.NEXT_PUBLIC_NUMMI_API_URL + '/dev/anon-strings')
       .then(response => {
         setPosts(response.data);
       })
