@@ -14,6 +14,7 @@ function LoginPage() {
       <Head>
         <title>Login to Nummi</title>
       </Head>
+      <Banner className="banner-disabled"></Banner>
       <div id={styles.form} className='form-box'>
         <h1>Login</h1>
         <RowBreak height={".8em"}/>
