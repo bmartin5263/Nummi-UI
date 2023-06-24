@@ -7,9 +7,9 @@ function TextField({name, warning, type, className}) {
   const [text, setText] = useState("");
 
   const defaultStyle = {
-    'display': 'flex',
-    'flex-wrap': 'wrap',
-    'width': '100%'
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%'
   };
 
   const warningClass = getWarningClass(text, warning);
