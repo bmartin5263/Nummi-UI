@@ -7,7 +7,7 @@ async function hello() {
     let loginResponse = await nummiClient.post('/login', {}, {
       auth: {
         username: "admin",
-        password: "P@ssw0rd1!"
+        password: "1538ad7A-4abE-4339-9ea6-e9baa0c14983-d62406fc-8582-4232-8829-A95b2422ef36"
       }
     });
     console.log("login success");
