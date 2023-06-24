@@ -4,7 +4,7 @@ import nummiClient from '../util/nummiClient';
 
 async function hello() {
   try {
-    let loginResponse = await nummiClient.post('http://localhost:5045/login', {}, {
+    let loginResponse = await nummiClient.post('/login', {}, {
       auth: {
         username: "admin",
         password: "P@ssw0rd1!"
@@ -13,11 +13,11 @@ async function hello() {
     console.log("login success");
     console.log(loginResponse.data);
 
-    let anonResponse = await nummiClient.get("http://localhost:5045/dev/anon-strings")
+    let anonResponse = await nummiClient.get("/dev/anon-strings")
     console.log("anon success");
     console.log(anonResponse.data);
 
-    let response = await nummiClient.get("http://localhost:5045/dev/strings")
+    let response = await nummiClient.get("/dev/strings")
     console.log("success");
     console.log(response.data);
   }
