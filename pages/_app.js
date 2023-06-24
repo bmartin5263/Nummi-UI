@@ -3,7 +3,7 @@ import ThemeContext from '../components/themeContext';
 import useLog from '../hooks/useLog';
 import '../styles/globals.scss'
 import { useEffect, useState } from "react";
-import { SessionProvider } from "next-auth/react"
+// import { SessionProvider } from "next-auth/react"
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const log = useLog("App");
@@ -24,12 +24,12 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     }
   }, [darkMode]);
   return (
-    <SessionProvider session={session}>
+    // <SessionProvider session={session}>
       <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
       </ThemeContext.Provider>
-    </SessionProvider>
+    // </SessionProvider>
   )
 }
