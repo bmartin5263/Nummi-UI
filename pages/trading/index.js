@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import nummiClient from '../../util/nummiClient';
 
 function TradePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_NUMMI_API_URL + '/dev/anon-strings')
+    nummiClient.get(process.env.NEXT_PUBLIC_NUMMI_API_URL + '/dev/anon-strings')
       .then(response => {
         setPosts(response.data);
       })

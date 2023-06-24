@@ -69,7 +69,8 @@ const nextAuthOptions = (req, res) => {
     providers: [
       CredentialsProvider({
         async authorize(credentials) {
-          try {                      
+          try {
+            console.log("Logging In");
             const response = await nummiClient.post('/login', {}, {
               auth: {
                 username: credentials.username,
@@ -83,9 +84,11 @@ const nextAuthOptions = (req, res) => {
 
             console.log(cookies);
             res.setHeader('Set-Cookie', cookies);
+            // res.setHeader('Access-Control-Allow-Credentials', response.headers['access-control-allow-credentials']);
             
             return response.data
           } catch (error) {
+            console.log("Failed to Login");
             console.log(error)
             return Promise.reject(new Error("Login Failed"));
           } 
@@ -94,18 +97,23 @@ const nextAuthOptions = (req, res) => {
     ],
     callbacks: {
       async jwt({ token, user }) {
+        console.log("jwt(" + token + ", " + user + ")")
         if (user?.userId) {
+          console.log("Has User Id");
           return { ...token, ...user };
         }
       
         // on subsequent calls, token is provided and we need to check if it's expired
         if (token?.accessTokenExpires && Date.now() / 1000 < token.accessTokenExpires) {
+          console.log("Not Expired");
           return { ...token, ...user };
         } 
         else if (token?.refreshToken) {
+          console.log("Refreshing");
           return refreshAccessToken(token);
         }
       
+        console.log("Regular Return");
         return { ...token, ...user };
       }
     },

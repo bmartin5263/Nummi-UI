@@ -6,6 +6,7 @@ import Banner from '../../components/banner';
 import LoginButton from '../../components/loginButton';
 import { getSession } from 'next-auth/react';
 import nummiClient from '../../util/nummiClient';
+import axios from 'axios';
 
 function SimulationsPage(props) {
   return (
@@ -27,6 +28,7 @@ export async function getServerSideProps (context) {
   const session = await getSession(context)
 
   if (!session) {
+      console.log("No Session");
       return {
           redirect: {
               destination: '/login',
@@ -37,7 +39,12 @@ export async function getServerSideProps (context) {
 
   // This request works
   try {
-    const response = await nummiClient.get('/dev/strings');
+    console.log("Getting Strings");
+    const response = await axios('http://localhost:5045/dev/strings', {
+      method: 'GET',
+      withCredentials: true
+    })
+    // const response = await nummiClient.get('/dev/strings');
     return {
       props: {
           session,
