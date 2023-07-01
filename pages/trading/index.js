@@ -6,7 +6,7 @@ function TradePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    nummiClient.get(process.env.NEXT_PUBLIC_NUMMI_API_URL + '/dev/anon-strings')
+    nummiClient.get('/dev/strings')
       .then(response => {
         setPosts(response.data);
       })
