@@ -8,8 +8,8 @@ import useLog from '../hooks/useLog';
 export const siteTitle = 'Nummi';
 
 export default function Layout({ children }) {
-  const log = useLog("Layout");
-  log("render layout");
+  // const log = useLog("Layout");
+  // log("render layout");
   const theme = useContext(ThemeContext);
   return (
     <div className="content">

@@ -7,58 +7,48 @@ import LoginButton from '../../components/loginButton';
 import { getSession } from 'next-auth/react';
 import nummiClient from '../../util/nummiClient';
 import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
+import useLog from '../../hooks/useLog';
+import { getServerSession } from 'next-auth';
+import { nextAuthOptions } from '../api/auth/[...nextauth]';
 
 function SimulationsPage(props) {
+  const isAuthenticated = useAuth(true);
   return (
     <>
       <Head>
         <title>Simulations</title>
       </Head>
       <Banner className="banner-info" text="Create an Account to Begin Trading!"/>
-      <p>
-        {props.info}
-      </p>
+      <p>{isAuthenticated ? "yes" : "no"}</p>
     </>
   );
 }
 
 export default SimulationsPage
 
-export async function getServerSideProps (context) {
-  const session = await getSession(context)
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, nextAuthOptions(context.req, context.res))
+  const log = useLog("SimulationsPage")
 
+  log("Getting Simulation Props")
   if (!session) {
-      console.log("No Session");
+      log("No Session");
       return {
           redirect: {
-              destination: '/login',
+              destination: '/login/new',
               permanent: false
           }
       }
   }
 
-  // This request works
-  try {
-    console.log("Getting Strings");
-    const response = await axios('http://localhost:5045/dev/strings', {
-      method: 'GET',
-      withCredentials: true
-    })
-    // const response = await nummiClient.get('/dev/strings');
-    return {
-      props: {
-          session,
-          info: response.data
-      }
-  }
-  }
-  catch (error) {
-    console.log(error);
-    return {
-      props: {
-          session,
-          info: "error"
-      }
-  }
-  }
+  log("Getting Strings");
+  const res = (await nummiClient.get("dev/strings", {
+    headers: {
+      Authorization: "Bearer " + session.accessToken
+    }
+  })).data;
+  log(res);
+
+  return {props: {}};
 }

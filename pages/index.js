@@ -1,34 +1,7 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
-import nummiClient from '../util/nummiClient';
-
-async function hello() {
-  try {
-    let loginResponse = await nummiClient.post('/login', {}, {
-      auth: {
-        username: "admin",
-        password: "blah"
-      }
-    });
-    console.log("login success");
-    console.log(loginResponse.data);
-
-    let anonResponse = await nummiClient.get("/dev/anon-strings")
-    console.log("anon success");
-    console.log(anonResponse.data);
-
-    let response = await nummiClient.get("/dev/strings")
-    console.log("success");
-    console.log(response.data);
-  }
-  catch (err) {
-    console.log("error");
-    console.log(err);
-  }
-}
 
 export default function Home() {
-  hello();
   return (
       <>
         <Head>

@@ -5,7 +5,7 @@ const nummiClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_NUMMI_API_URL,
     withCredentials: true,
     credentials: 'include',
-    headers:{
+    headers: {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'
     }

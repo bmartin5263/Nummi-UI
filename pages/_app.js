@@ -3,11 +3,13 @@ import ThemeContext from '../components/themeContext';
 import useLog from '../hooks/useLog';
 import '../styles/globals.scss'
 import { useEffect, useState } from "react";
-// import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react"
+import RefreshTokenHandler from '../util/refreshTokenHandler';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const log = useLog("App");
   const [darkMode, setDarkMode] = useState(false);
+  const [interval, setInterval] = useState(0);
   
   const toggleDarkMode = () => {
     log("Toggling Dark Mode");
@@ -24,12 +26,13 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     }
   }, [darkMode]);
   return (
-    // <SessionProvider session={session}>
-      <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <SessionProvider session={session} refetchInterval={interval}>
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
         <Layout>
           <Component {...pageProps} />
+          <RefreshTokenHandler setInterval={setInterval} />
         </Layout>
       </ThemeContext.Provider>
-    // </SessionProvider>
+    </SessionProvider>
   )
 }
