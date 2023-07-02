@@ -2,7 +2,7 @@ import styles from 'styles/textField.module.scss'
 import useLog from '../hooks/useLog';
 import { useState } from 'react';
 
-function TextField({name, warning, type, className}) {
+function TextField({name, title, warning, type, className}) {
   const log = useLog("TextField");
   const [text, setText] = useState("");
 
@@ -23,7 +23,7 @@ function TextField({name, warning, type, className}) {
   return (
     <div className={"TextBox " + className}>
       <div style={defaultStyle}>
-        <p className={titleClass}>{name}</p>
+        <p className={titleClass}>{title}</p>
         <p className={warningClass}>{warning}</p>
       </div>
       <div style={defaultStyle}>
@@ -32,7 +32,7 @@ function TextField({name, warning, type, className}) {
           id={name} 
           name={name} 
           type={type ?? "text"}
-          placeholder={name}
+          placeholder={title}
           onChange={handleChange}
         />
       </div>

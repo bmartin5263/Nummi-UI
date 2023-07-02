@@ -112,8 +112,8 @@ export const nextAuthOptions = (req, res) => {
             return response.data
           } catch (error) {
             console.log("[authorize] Failed to Login");
-            console.log(error)
-            return Promise.reject(new Error("Login Failed"));
+            console.log(error?.response?.data?.userMessage);
+            return Promise.reject(new Error(error?.response?.data?.userMessage ?? "Unable to Login at this time. Please try again in a few minutes"));
           } 
         }
       })
@@ -188,9 +188,9 @@ export const nextAuthOptions = (req, res) => {
       },
     },
     pages: {
-      signIn: '/login/new',
+      signIn: '/login',
       signOut: '/register',
-      error: '/bots', // Error code passed in query string as ?error=
+      error: '/login', // Error code passed in query string as ?error=
       verifyRequest: '/auth/verify-request', // (used for check email message)
       newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     }

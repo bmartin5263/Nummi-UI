@@ -36,19 +36,11 @@ export async function getServerSideProps(context) {
       log("No Session");
       return {
           redirect: {
-              destination: '/login/new',
+              destination: '/login',
               permanent: false
           }
       }
   }
-
-  log("Getting Strings");
-  const res = (await nummiClient.get("dev/strings", {
-    headers: {
-      Authorization: "Bearer " + session.accessToken
-    }
-  })).data;
-  log(res);
-
+  
   return {props: {}};
 }

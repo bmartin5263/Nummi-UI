@@ -19,13 +19,13 @@ function RegisterPage() {
       <div id={styles.form} className='form-box'>
         <h1>Register</h1>
         <RowBreak height=".8em"/>
-        <TextField className={styles.textField} name="Email"/>
+        <TextField className={styles.textField} name="email" title="Email"/>
         <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="Username"/>
+        <TextField className={styles.textField} name="username" title="Username"/>
         <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="Password" type="password"/>
+        <TextField className={styles.textField} name="password" type="password" title="Password"/>
         <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="Retype Password" type="password"/>
+        <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password"/>
         <RowBreak height="1.8em"/>
           <button 
             id={styles.loginButton} class="button button-primary"
