@@ -202,7 +202,7 @@ nav {
 
  .banner {
   width: 100%;
-  height: 3em;
+  min-height: 3em;
   line-height: 3em;
   vertical-align: middle;
   text-align: center;
@@ -279,7 +279,7 @@ nav {
 @media screen and (max-width: 700px) {
   .form-box {
     transition: width .2s;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
   }
 }

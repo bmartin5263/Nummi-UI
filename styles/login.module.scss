@@ -21,3 +21,17 @@
 #forgotPasswordButton {
   margin-left: auto;
 }
+
+@media screen and (max-width: 700px) {
+  .textField {
+    width: 90%;
+  }
+
+  #loginButton {
+    width: 90%;
+  }
+
+  .linkGroup {
+    width: 90%;
+  }
+}
