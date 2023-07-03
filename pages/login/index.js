@@ -14,16 +14,16 @@ import useLog from '../../hooks/useLog';
 function LoginPage({ csrfToken }) {
   const log = useLog('Login');
   const searchParams = useSearchParams(); 
-  const search = searchParams.get('error');
-  log(search);
+  const error = searchParams.get('error');
+  log("Error = " + error);
   return (
     <>
       <Head>
         <title>Login to Nummi</title>
       </Head>
       <RowBreak height={".6em"}/>
-      <Banner className={search ? "banner-error" : "banner-disabled"}>
-        {search}
+      <Banner className={styles.banner + (error ? " banner-error" : " banner-disabled")}>
+        {error}
       </Banner>
       <form id={styles.form} className='form-box' method="post" action="/api/auth/callback/credentials">
         <h1>Login</h1>
