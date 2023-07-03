@@ -274,11 +274,18 @@ nav {
     width: 95%;
     margin: 0 auto;
   }
+
+  .form-box {
+    transition: width .2s;
+    transition: background-color .4s;
+    width: 70%;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .form-box {
     transition: width .2s;
+    transition: background-color .4s;
     width: 100%;
     margin: 0 auto;
   }
