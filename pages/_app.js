@@ -15,6 +15,7 @@ export default function NummiApp({ Component, theme, pageProps: { session, ...pa
   const [interval, setInterval] = useState(0);
   
   const toggleDarkMode = () => {
+    log("Toggling Dark Mode");
     setDarkMode(!darkMode);
   };
 
@@ -29,7 +30,7 @@ export default function NummiApp({ Component, theme, pageProps: { session, ...pa
       document.cookie = 'Theme=light; expires=Sun, 1 Jan 2024 00:00:00 UTC; path=/'
     }
   }, [darkMode]);
-
+  
   return (
     <SessionProvider session={session} refetchInterval={interval}>
       <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
@@ -46,7 +47,11 @@ NummiApp.getInitialProps = async (context) => {
   const appProps = await App.getInitialProps(context)
   const session = await getSession(context)
   const token = context?.ctx?.req?.cookies["X-Access-Token"];
-  const theme = context?.ctx?.req?.cookies["Theme"];
+  let theme = context?.ctx?.req?.cookies["Theme"];
+
+  if (theme == undefined || theme == null) {
+    theme = 'dark';
+  }
 
   // const cookieList = cookies();
 
