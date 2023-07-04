@@ -38,13 +38,14 @@ export default function NummiApp({ Component, theme, pageProps: { session, ...pa
   //   setReady(true);
   // }, []);
 
-  useEffect(() => { 
-    if (darkMode) {
-      document.querySelector("body").classList.add("dark");
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (darkMode && !body.classList.contains("dark")) {
+      body.classList.add("dark");
       document.cookie = 'Theme=dark; expires=Sun, 1 Jan 2024 00:00:00 UTC; path=/'
     }
-    else {
-      document.querySelector("body").classList.remove("dark");
+    else if (!darkMode && body.classList.contains("dark")) {
+      body.classList.remove("dark");
       document.cookie = 'Theme=light; expires=Sun, 1 Jan 2024 00:00:00 UTC; path=/'
     }
   }, [darkMode]);
