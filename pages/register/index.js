@@ -28,7 +28,7 @@ function RegisterPage() {
         <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password"/>
         <RowBreak height="1.8em"/>
           <button 
-            id={styles.loginButton} class="button button-primary"
+            id={styles.loginButton} className="button button-primary"
             onClick={() => setClicked(!clicked)}
           >
             Create Account{clicked && <span className='loader'></span>}

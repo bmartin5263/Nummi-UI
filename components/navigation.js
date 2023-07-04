@@ -12,7 +12,6 @@ function Navigation() {
   const router = useRouter();
   const isAuthenticated = useAuth(false);
   const log = useLog("Navigation");
-  log(isAuthenticated);
 
   return (
     <nav>

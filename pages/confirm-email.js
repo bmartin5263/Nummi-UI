@@ -1,0 +1,41 @@
+import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
+import RowBreak from '../components/rowBreak';
+import nummiClient from '../util/nummiClient';
+import useLog from '../hooks/useLog';
+
+export default function ConfirmEmail() {
+  return (
+      <>
+        <Head>
+          <title>Confirm Email</title>
+        </Head>
+        <div className='flex-wrapped' style={{justifyContent: 'center'}}>
+          <RowBreak height={"15em"}></RowBreak>
+          <h1 className="center-header">Email Confirmed!</h1>
+        </div>
+      </>
+  );
+}
+
+export async function getServerSideProps(context) {
+  const query = context.query;
+  const log = useLog("ConfirmEmailPage")
+
+  try {
+    var res = await nummiClient.post("confirm-email", {
+      email: query.email,
+      token: query.token
+    })
+    return {props: {}};
+  }
+  catch (error) {
+    log(error);
+    return {
+      redirect: {
+          destination: '/bots',
+          permanent: false
+      }
+    }
+  }
+}

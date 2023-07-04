@@ -12,7 +12,7 @@ export default function Layout({ children }) {
   // log("render layout");
   const theme = useContext(ThemeContext);
   return (
-    <div className="content">
+    <>
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
@@ -24,9 +24,13 @@ export default function Layout({ children }) {
         <meta name="msapplication-TileColor" content="#00a300"></meta>
         <meta name="theme-color" content="#585858"></meta>
       </Head>
-      <Navigation />
-      <main>{children}</main>
-    </div>
+      <div className="content">
+        <div className='flex-content'>
+          <Navigation />
+          <main>{children}</main>
+        </div>
+      </div>
+    </>
   );
 }
 
