@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   static async getInitialProps(context) { 
     const initialProps = await Document.getInitialProps(context)
-    const theme = context?.req?.cookies["Theme"];
+    const theme = context?.req?.cookies["Theme"] ?? "dark";
   
     // const cookieList = cookies();
   

@@ -15,28 +15,8 @@ export default function NummiApp({ Component, theme, pageProps: { session, ...pa
   const [interval, setInterval] = useState(0);
   
   const toggleDarkMode = () => {
-    log("Toggling Dark Mode");
     setDarkMode(!darkMode);
   };
-
-  // if (theme == "dark" && !darkMode) {
-  //   setDarkMode(true);
-  // }
-  // else if (theme == "light" && darkMode) {
-  //   setDarkMode(false);
-  // }
-
-  // useEffect(() => { 
-  //   log("Checking for Body Dark Mode");
-  //   const theme = window.localStorage.getItem("theme");
-  //   if (theme == "dark") {
-  //     setDarkMode(true);
-  //   }
-  //   else if (theme == "light") {
-  //     setDarkMode(false);
-  //   }
-  //   setReady(true);
-  // }, []);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -49,6 +29,7 @@ export default function NummiApp({ Component, theme, pageProps: { session, ...pa
       document.cookie = 'Theme=light; expires=Sun, 1 Jan 2024 00:00:00 UTC; path=/'
     }
   }, [darkMode]);
+
   return (
     <SessionProvider session={session} refetchInterval={interval}>
       <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
