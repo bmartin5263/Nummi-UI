@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
 import RowBreak from '../components/rowBreak';
 import nummiClient from '../util/nummiClient';
 import { useRouter } from 'next/router';
@@ -35,10 +34,9 @@ export default function EmailConfirmationSent() {
         <Banner className={(bannerError ? " banner-error" : " banner-disabled")}>
           {bannerError}
         </Banner>
-        <div className='flex-wrapped' style={{justifyContent: 'center', gap: ".5em"}}>
+        <div className='flex-wrapped' style={{justifyContent: 'center'}}>
           <RowBreak height={"14em"}></RowBreak>
-          <h1 className="center-header">Confirmation Email Sent</h1>
-          <RowBreak></RowBreak>
+          <h1 className="center-header">Confirmation Email Sent</h1><RowBreak height={"2em"}></RowBreak>
           <button className="button" onClick={handleResendEmail}>
             {clicked ? <span className='loader'></span> : "Resend Confirmation Email"}
           </button>

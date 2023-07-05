@@ -83,7 +83,7 @@ function RegisterPage() {
     try {
       const res = await nummiClient.post("register", data);
       console.log(res.data);
-      router.push("/email-confirmation-sent?email=" + email)
+      router.push("/confirmation-email-sent?email=" + email)
     }
     catch (error) {
       const data = error.response?.data;
@@ -117,30 +117,27 @@ function RegisterPage() {
       <Head>
         <title>Register</title>
       </Head>
-      <RowBreak height={".6em"}/>
-      <Banner className={styles.banner + (bannerError ? " banner-error" : " banner-disabled")}>
-        {bannerError}
-      </Banner>
-      <form id={styles.form} className='form-box' onSubmit={handleSubmit}>
-        <h1>Register</h1>
-        <RowBreak height=".8em"/>
-        <TextField className={styles.textField} name="email" title="Email" warning={emailError}/>
-        <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="username" title="Username" warning={usernameError}/>
-        <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="password" type="password" title="Password" warning={passwordError}/>
-        <RowBreak height=".6em"/>
-        <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password" warning={retypedPasswordError}/>
-        <RowBreak height="1.8em"/>
+      <article>
+        <RowBreak height={".6em"}/>
+        <Banner className={styles.banner + (bannerError ? " banner-error" : " banner-disabled")}>
+          {bannerError}
+        </Banner>
+        <form id={styles.form} className='form-box' onSubmit={handleSubmit}>
+          <h1>Register</h1><RowBreak height=".8em"/>
+          <TextField className={styles.textField} name="email" title="Email" warning={emailError}/><RowBreak height=".6em"/>
+          <TextField className={styles.textField} name="username" title="Username" warning={usernameError}/><RowBreak height=".6em"/>
+          <TextField className={styles.textField} name="password" type="password" title="Password" warning={passwordError}/><RowBreak height=".6em"/>
+          <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password" warning={retypedPasswordError}/><RowBreak height="1.8em"/>
           <button id={styles.registerButton} type="submit" className="button button-primary">
             Create Account{clicked && <span className='loader'></span>}
           </button>
-        <RowBreak height="1.8em"/>
+          <RowBreak height="1.8em"/>
           <div className={styles.linkGroup}>
             <Link href="/login" id={styles.loginButton} className='inline'>Login</Link>
             <Link href="/resend-confirmation-email" className='inline'>Resend Confirmation Email</Link>
           </div>
-      </form>
+        </form>
+      </article>
     </>
   );
 }

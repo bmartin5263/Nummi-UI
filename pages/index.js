@@ -1,12 +1,11 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
 import RowBreak from '../components/rowBreak';
 
 export default function Home() {
   return (
       <>
         <Head>
-          <title>{siteTitle}</title>
+          <title>Nummi</title>
         </Head>
         <div className='flex-wrapped' style={{justifyContent: 'center'}}>
           <RowBreak height={"4em"}></RowBreak>

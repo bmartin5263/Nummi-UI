@@ -142,3 +142,23 @@
 :global(.dark) .logo:active {
   text-decoration: none;
 }
+
+@media screen and (max-width: 700px) {
+  #loginButton {
+    margin: 0;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  #registerButton {
+    margin: 0;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  #toggleDarkModeButton {
+    margin: 0;
+    flex-grow: 1;
+    width: 100%;
+  }
+}

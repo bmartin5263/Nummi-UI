@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
 import RowBreak from '../components/rowBreak';
 import nummiClient from '../util/nummiClient';
 import useLog from '../hooks/useLog';

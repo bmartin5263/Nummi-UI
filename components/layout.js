@@ -2,15 +2,10 @@ import Head from 'next/head';
 import Navigation from './navigation';
 import { useContext } from "react";
 import ThemeContext from '../components/themeContext'
-import Banner from './banner';
-import useLog from '../hooks/useLog';
-
-export const siteTitle = 'Nummi';
+import Footer from './footer';
+import RowBreak from './rowBreak';
 
 export default function Layout({ children }) {
-  // const log = useLog("Layout");
-  // log("render layout");
-  const theme = useContext(ThemeContext);
   return (
     <>
       <Head>
@@ -28,6 +23,8 @@ export default function Layout({ children }) {
         <div className='flex-content'>
           <Navigation />
           <main>{children}</main>
+          <Footer/>
+          <RowBreak/>
         </div>
       </div>
     </>

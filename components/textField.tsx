@@ -4,14 +4,22 @@ import { useState } from 'react';
 
 const log = useLog("TextField")
 
-function TextField({name, title, warning, type, className}) {
+type TextFieldProps = {
+  name: string, 
+  title: string, 
+  warning: string, 
+  type: string, 
+  className: string
+}
+
+function TextField({name, title, warning, type, className}: TextFieldProps) {
   const [text, setText] = useState("");
 
   const defaultStyle = {
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%'
-  };
+  } as const;
 
   const handleChange = (event) => {
     let value = event.target.value; 
