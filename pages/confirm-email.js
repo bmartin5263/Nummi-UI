@@ -10,7 +10,7 @@ export default function ConfirmEmail() {
           <title>Confirm Email</title>
         </Head>
         <div className='flex-wrapped' style={{justifyContent: 'center'}}>
-          <RowBreak height={"15em"}></RowBreak>
+          <div className='row-break-no-mobile'></div>
           <h1 className="center-header">Email Confirmed!</h1>
         </div>
       </>

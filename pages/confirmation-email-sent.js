@@ -35,7 +35,7 @@ export default function EmailConfirmationSent() {
           {bannerError}
         </Banner>
         <div className='flex-wrapped' style={{justifyContent: 'center'}}>
-          <RowBreak height={"14em"}></RowBreak>
+          <div className='row-break-no-mobile'></div>
           <h1 className="center-header">Confirmation Email Sent</h1><RowBreak height={"2em"}></RowBreak>
           <button className="button" onClick={handleResendEmail}>
             {clicked ? <span className='loader'></span> : "Resend Confirmation Email"}
