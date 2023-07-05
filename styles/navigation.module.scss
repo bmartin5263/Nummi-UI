@@ -121,7 +121,6 @@
 :global(.dark) .logo {
   font-family: Verdana, sans-serif;
   font-weight: bold;
-  font-size: 48px;
   color: $primary-dark;
 }
 
@@ -160,5 +159,9 @@
     margin: 0;
     flex-grow: 1;
     width: 100%;
+  }
+
+  .logo {
+    font-size: 0em;
   }
 }

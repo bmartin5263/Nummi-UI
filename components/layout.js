@@ -23,7 +23,7 @@ export default function Layout({ children }) {
         <div className='flex-content'>
           <Navigation />
           <main>{children}</main>
-          <Footer/>
+          {/* <Footer/> */}
           <RowBreak/>
         </div>
       </div>
