@@ -83,7 +83,7 @@ function RegisterPage() {
     try {
       const res = await nummiClient.post("register", data);
       console.log(res.data);
-      router.push("/")
+      router.push("/email-confirmation-sent?email=" + email)
     }
     catch (error) {
       const data = error.response?.data;

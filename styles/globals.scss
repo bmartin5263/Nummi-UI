@@ -180,6 +180,19 @@ nav {
 // Dark
 // Basic Button
 
+.dark .button {
+  background-color: $button-enabled-dark;
+}
+
+.button:hover {
+  background-color: $button-hover-dark;
+}
+
+.button:active {
+  background-color: $button-active-dark;
+  transition-duration: 0.0s;
+}
+
 // Primary Button
 
 .dark .button-primary {
