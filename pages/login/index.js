@@ -15,7 +15,6 @@ function LoginPage({ csrfToken }) {
   const log = useLog('Login');
   const searchParams = useSearchParams(); 
   const error = searchParams.get('error');
-  log("Error = " + error);
   return (
     <>
       <Head>
