@@ -86,6 +86,7 @@ function RegisterPage() {
       router.push("/confirmation-email-sent?email=" + email)
     }
     catch (error) {
+      setClicked(false);
       const data = error.response?.data;
       if (data?.subErrors && Array.isArray(data.subErrors)) {
         for (const subError of data.subErrors) {
@@ -107,9 +108,6 @@ function RegisterPage() {
         setBannerError(error.response?.data?.userMessage ?? "Unable to Register at this time. Please try again in a few minutes");
       }
     }
-    finally {
-      setClicked(false);
-    }
   }
 
   return (
@@ -127,8 +125,8 @@ function RegisterPage() {
           <TextField className={styles.textField} name="username" title="Username" warning={usernameError}/><RowBreak height=".6em"/>
           <TextField className={styles.textField} name="password" type="password" title="Password" warning={passwordError}/><RowBreak height=".6em"/>
           <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password" warning={retypedPasswordError}/><RowBreak height="1.8em"/>
-          <button id={styles.registerButton} type="submit" className="button button-primary">
-            Create Account{clicked && <span className='loader'></span>}
+          <button id={styles.registerButton} type="submit" className="button button-primary" disabled={clicked}>
+            {clicked ? <span className='loader'></span> : "Create Account"}
           </button>
           <RowBreak height="1.8em"/>
           <div className={styles.linkGroup}>

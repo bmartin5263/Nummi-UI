@@ -34,23 +34,14 @@ export default function EmailConfirmationSent() {
         </Head>
         <article>
           <Banner bannerType={BannerType.ERROR} omnipresent>
-            hello
           </Banner>
-          <form className='form-box'>
-            <h1>Login</h1>
-            <input name="csrfToken" type="hidden"/>
-            <RowBreak height={".8em"}/>
-            <TextField name="username" title="Username or Email"/>
+          <form className='form-box2'>
+            <h1>Resend Confirmation Email</h1>
+            <TextField name="email" title="Email" type="email"/>
+            <RowBreak height={"1.8em"}/>
+            <button type="submit" className="button button-primary">Resend Email</button>
             <RowBreak height={".6em"}/>
-            <TextField name="password" title="Password" type="password"/>
-            <RowBreak height={"1.8em"}/>
-            <button type="submit" className="button button-primary">Login</button>
-            <RowBreak height={"1.8em"}/>
-            <RowBreak/>
           </form>
-          <p>
-            Hello
-          </p>
         </article>
       </>
   );

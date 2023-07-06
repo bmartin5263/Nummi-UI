@@ -110,12 +110,19 @@ nav {
 .loader {
   margin: auto 0 auto 1em;
   display: inline-block;
-  border: 3px solid $darkest-green; /* Light grey */
-  border-top: 3px solid white; /* Blue */
+  border: 3px solid $darker-gray;
+  border-top: 3px solid $white-gray;
   border-radius: 50%;
   width: 20px;
   height: 20px;
   animation: spin 1s linear infinite;
+
+  transition: border-color .2s;
+}
+
+.dark .loader {
+  border: 3px solid $background-gray;
+  border-top: 3px solid white;
 }
 
 @keyframes spin {
@@ -363,16 +370,6 @@ nav {
  * =============================
  */
 
- .reg-box {
-  display: flex;
-  flex-wrap: wrap;
-
-  width: 50%;
-  height: 10em;
-  border-radius: 12px;
-  transition-duration: 0.4s;
-  background-color: $white-gray;
- }
 
  .form-box {
   display: flex;
@@ -385,11 +382,6 @@ nav {
   background-color: $white-gray;
  }
 
-// .form-box .TextField {
-//   margin: 0 auto;
-//   width: 70%;
-//  }
-
  .form-box h1 {
   width: 100%; 
   text-align: center;
@@ -401,7 +393,39 @@ nav {
   background-color: $division-gray;
 }
 
-.dark .reg-box {
+.form-box2 {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 50%;
+  margin: 0 auto;
+  padding: 1em 5em;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  background-color: $white-gray;
+  column-gap: .8em;
+
+  & h1 {
+    width: 100%; 
+    text-align: center;
+    transition-duration: 0.4s;
+    margin: .3em 0;
+  }
+
+  & .textBox {
+    // width: 100%; 
+    text-align: center;
+    transition-duration: 0.4s;
+    flex-grow: 1;
+    // margin: .8em 0;
+  }
+
+  & .button {
+    flex-grow: 1;
+  }
+}
+
+.dark .form-box2 {
   background-color: $division-gray;
 }
 
