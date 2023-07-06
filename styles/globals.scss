@@ -113,8 +113,8 @@ nav {
   border: 3px solid $darker-gray;
   border-top: 3px solid $white-gray;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
   animation: spin 1s linear infinite;
 
   transition: border-color .2s;
@@ -233,6 +233,93 @@ nav {
 
 /*
  * =============================
+ * --------- BUTTON ------------
+ * =============================
+ */
+
+// Basic Button
+
+.button2 {
+  font-weight: bold;
+  background-color: $button-enabled-light;
+  color: #ffffff;
+  padding: 10px 32px;
+  text-align: center;
+  border-radius: 8px;
+  transition-duration: .2s;
+
+  // span {
+	// 	display: flex;
+	// 	position: relative;
+	// 	z-index: 1;
+	// }
+	
+	.icon {
+		font-size: 1em;
+	}
+
+  &:hover {
+    background-color: $button-hover-light;
+  }
+  
+  &:active {
+    background-color: $button-active-light;
+    transition-duration: 0.0s;
+  }  
+
+  &:disabled,&[disabled] {
+    background-color: $button-primary-disabled-light;
+    cursor: not-allowed;
+  }
+
+  &.button2-primary {
+    background-color: $button-primary-enabled-light;
+  
+    &:hover {
+      background-color: $button-primary-hover-light;
+    }
+    
+    &:active {
+      background-color: $button-primary-active-light;
+    }
+  }
+}
+
+// Dark
+// Basic Button
+
+.dark .button2 {
+  background-color: $button-enabled-dark;
+
+  &:hover {
+    background-color: $button-hover-dark;
+  }
+
+  &:active {
+    background-color: $button-active-dark;
+    transition-duration: 0.0s;
+  }
+
+  &.button2-primary {
+    background-color: $button-primary-enabled-dark;
+
+    &:hover {
+      background-color: $button-primary-hover-dark;
+    }
+    
+    &:active {
+      background-color: $button-primary-active-dark;
+    }
+  }
+
+  &:disabled,&[disabled]{
+      background-color: $button-primary-disabled-dark;
+      color: $dark-gray;
+    }
+}
+
+/*
+ * =============================
  * --------- Headers -------
  * =============================
  */
@@ -323,47 +410,6 @@ nav {
 	}
 }
 
-/*
- * =============================
- * --------- BANNER ------------
- * =============================
- */
-
-//  .banner {
-//   width: 100%;
-//   min-height: 3em;
-//   line-height: 3em;
-//   vertical-align: middle;
-//   text-align: center;
-//   font-family: Avenir;
-//   transition-duration: 0.3s;
-//   margin-bottom: 1em;
-//  }
-
-//  .banner-info {
-//   background-color: #CCE5FF;
-//   color: #004C99;
-//  }
-
-//  .dark .banner-info {
-//   background-color: #003265;
-//   color: #8dc4ff;
-//  }
-
-//  .banner-error {
-//   background-color: #FFCCCC;
-//   color: #660000;
-//  }
-
-//  .dark .banner-error {
-//   background-color: #660000;
-//   color: #ffacac;
-//  }
-
-//  .banner-disabled {
-//   opacity: 0%;
-//  }
-
  /*
  * =============================
  * --------- FORM BOX ----------
@@ -441,10 +487,23 @@ nav {
     transition: background-color .4s;
     width: 70%;
   }
+
+  .form-box2 {
+    transition: width .2s;
+    transition: background-color .4s;
+    width: 70%;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .form-box {
+    transition: width .2s;
+    transition: background-color .4s;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .form-box2 {
     transition: width .2s;
     transition: background-color .4s;
     width: 100%;
@@ -456,14 +515,6 @@ nav {
     align-items: flex-start;
     margin-bottom: .1em;
     order: 10;
-  }
-
-  .banner {
-    margin-bottom: .8em;
-  }
-
-  .banner-disabled {
-    margin-bottom: .1em;
   }
 
   .row-break-no-mobile {

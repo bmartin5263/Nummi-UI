@@ -18,6 +18,8 @@ export class BannerType {
 
   // Create new instances of the same class as static attributes
   static INFO = new BannerType(styles.info)
+  static SUCCESS = new BannerType(styles.success)
+  static WARN = new BannerType(styles.warn)
   static ERROR = new BannerType(styles.error)
 
   constructor(css: string) {

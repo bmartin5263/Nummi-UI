@@ -18,6 +18,16 @@
     color: #004C99;
   }
 
+  &.success {
+    background-color: #ccffda;
+    color: #006d04;
+  }
+
+  &.warn {
+    background-color: #FFECBC;
+    color: #856110;
+  }
+
   &.error {
     background-color: #FFCCCC;
     color: #660000;
@@ -33,5 +43,15 @@
   &.error {
     background-color: #660000;
     color: #ffacac;
+  }
+
+  &.warn {
+    background-color: #978312;
+    color: #FFECBC;
+  }
+
+  &.success {
+    background-color: #004802;
+    color: #ccffda;
   }
 }

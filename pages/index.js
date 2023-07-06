@@ -9,7 +9,7 @@ export default function Home() {
           <title>Nummi</title>
         </Head>
         <article> 
-          <Banner bannerType={BannerType.INFO}>
+          <Banner bannerType={BannerType.SUCCESS}>
             Hello
           </Banner>
           <div className='flex-wrapped' style={{justifyContent: 'center'}}>
