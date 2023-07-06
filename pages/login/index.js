@@ -19,14 +19,18 @@ function LoginPage({ csrfToken }) {
   if (email) {
     email = decodeURI(email);
   }
+
+  const bannerText = email != null 
+    ? "Email successfully confirmed! Please try logging in" 
+    : error != null ? error : null;
   return (
     <>
       <Head>
         <title>Login to Nummi</title>
       </Head>
       <article>
-        <Banner bannerType={BannerType.ERROR} omnipresent>
-          {error}
+        <Banner bannerType={email == null ? BannerType.ERROR : BannerType.INFO} omnipresent>
+          {bannerText}
         </Banner>
         <form id={styles.form} className='form-box' method="post" action="/api/auth/callback/credentials">
           <h1>Login</h1>

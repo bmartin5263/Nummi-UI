@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Layout from '../../components/layout';
 
 import React from 'react'
-import Banner from '../../components/banner';
+import Banner, { BannerType } from '../../components/banner';
 import LoginButton from '../../components/loginButton';
 import { getSession } from 'next-auth/react';
 import nummiClient from '../../util/nummiClient';
@@ -19,8 +19,12 @@ function SimulationsPage(props) {
       <Head>
         <title>Simulations</title>
       </Head>
-      <Banner className="banner-info" text="Create an Account to Begin Trading!"/>
-      <p>{isAuthenticated ? "yes" : "no"}</p>
+      <article>
+        <Banner bannerType={BannerType.INFO}>
+          Create an Account
+        </Banner>
+        <p>{isAuthenticated ? "yes" : "no"}</p>
+      </article>
     </>
   );
 }
@@ -41,6 +45,6 @@ export async function getServerSideProps(context) {
           }
       }
   }
-  
+
   return {props: {}};
 }
