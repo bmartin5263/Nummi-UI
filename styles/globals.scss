@@ -107,21 +107,77 @@ nav {
   height: 14em;
 }
 
-.loader {
-  margin: auto 0 auto 1em;
+.lds-ellipsis {
   display: inline-block;
-  border: 3px solid $darker-gray;
+  position: relative;
+  width: 40px;  // doesn't matter
+  height: 40px; // doesn't matter
+  background-color: red;
+}
+.lds-ellipsis div {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px; // starting pos
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px; // starting pos
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 78px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 148px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(70px, 0);
+  }
+}
+
+
+.loader {
+  margin-left: 1em;
+  display: inline-block;
+  border: 3px solid $darkest-gray;
   border-top: 3px solid $white-gray;
   border-radius: 50%;
-  width: 1em;
-  height: 1em;
+  width: 1.2em;
+  height: 1.2em;
   animation: spin 1s linear infinite;
-
   transition: border-color .2s;
 }
 
 .dark .loader {
-  border: 3px solid $background-gray;
+  border: 3px solid $division-gray;
   border-top: 3px solid white;
 }
 
@@ -239,24 +295,44 @@ nav {
 
 // Basic Button
 
+.icon {
+  font-size: 1em;
+
+  &.left {
+    margin-right: .5em;
+  }
+}
+
 .button2 {
+  display: flex;
+  align-items: center;
+
   font-weight: bold;
   background-color: $button-enabled-light;
   color: #ffffff;
-  padding: 10px 32px;
+  padding: 0 2em;
   text-align: center;
   border-radius: 8px;
   transition-duration: .2s;
+  min-height: 2.5em;
+  min-width: 11em;
 
   // span {
 	// 	display: flex;
 	// 	position: relative;
 	// 	z-index: 1;
 	// }
-	
-	.icon {
-		font-size: 1em;
+
+  .icon {
+		// line-height: 2.125rem;
+		font-size: 1.25em;
+		// margin: 0 .25rem 0 -.25rem;
 	}
+
+  .loader {
+    border: 3px solid $darkest-gray;
+    border-top: 3px solid $white;
+  }
 
   &:hover {
     background-color: $button-hover-light;
@@ -267,13 +343,13 @@ nav {
     transition-duration: 0.0s;
   }  
 
-  &:disabled,&[disabled] {
-    background-color: $button-primary-disabled-light;
-    cursor: not-allowed;
-  }
-
   &.button2-primary {
     background-color: $button-primary-enabled-light;
+
+    .loader {
+      border: 3px solid $darkest-green;
+      border-top: 3px solid $white-gray;
+    }
   
     &:hover {
       background-color: $button-primary-hover-light;
@@ -283,6 +359,20 @@ nav {
       background-color: $button-primary-active-light;
     }
   }
+
+  &:disabled,&[disabled] {
+    background-color: $button-primary-disabled-light;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $button-primary-disabled-light;
+    }
+
+    .loader {
+      border: 3px solid $gray;
+      border-top: 3px solid $white-gray;
+    }
+  }
 }
 
 // Dark
@@ -290,6 +380,11 @@ nav {
 
 .dark .button2 {
   background-color: $button-enabled-dark;
+
+  .loader {
+    border: 3px solid $division-gray;
+    border-top: 3px solid $lighter-gray;
+  }
 
   &:hover {
     background-color: $button-hover-dark;
@@ -312,10 +407,19 @@ nav {
     }
   }
 
-  &:disabled,&[disabled]{
+  &:disabled,&[disabled] {
+    background-color: $button-primary-disabled-dark;
+    color: $dark-gray;
+
+    &:hover {
       background-color: $button-primary-disabled-dark;
-      color: $dark-gray;
     }
+
+    .loader {
+      border: 3px solid $division-gray;
+      border-top: 3px solid $lighter-gray;
+    }
+  }
 }
 
 /*
@@ -348,67 +452,67 @@ nav {
  */
 
 
-.btn {
-  width: 500px;
-	position: relative;
-	display: inline-flex;
-	flex: 0 0 auto;
-	flex-direction: row;
-	justify-content: center;
-	align-self: center;
-	// padding: 0 1.25rem;
-  padding: 0 3em;
+// .btn {
+//   width: 500px;
+// 	position: relative;
+// 	display: inline-flex;
+// 	flex: 0 0 auto;
+// 	flex-direction: row;
+// 	justify-content: center;
+// 	align-self: center;
+// 	// padding: 0 1.25rem;
+//   padding: 0 3em;
 
-	line-height: 2.125rem;
-	text-align: center;
-	margin: .125rem;
+// 	line-height: 2.125rem;
+// 	text-align: center;
+// 	margin: .125rem;
 	
-	border-radius: .125rem;
-	// border: 2px solid $green;
-	background-color: $green;
-	color: white;
-	text-decoration: none;
-	overflow: hidden;
-	cursor: pointer;
-  vertical-align: middle;
-	outline: none;
+// 	border-radius: .125rem;
+// 	// border: 2px solid $green;
+// 	background-color: $green;
+// 	color: white;
+// 	text-decoration: none;
+// 	overflow: hidden;
+// 	cursor: pointer;
+//   vertical-align: middle;
+// 	outline: none;
 	
-	&:before {
-		background-color: white;
-		content: "";
-		display: flex;
-		transform: scale(1, 0);
-		transition: transform .25s ease;
-		transform-origin: 50% 100%;
-		position: absolute;
-		overflow: hidden;
-		border-radius: 1px;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		//will-change: transform; //strange bug with right border
-		z-index: 0;
-	}
+// 	&:before {
+// 		background-color: white;
+// 		content: "";
+// 		display: flex;
+// 		transform: scale(1, 0);
+// 		transition: transform .25s ease;
+// 		transform-origin: 50% 100%;
+// 		position: absolute;
+// 		overflow: hidden;
+// 		border-radius: 1px;
+// 		top: 0;
+// 		left: 0;
+// 		right: 0;
+// 		bottom: 0;
+// 		//will-change: transform; //strange bug with right border
+// 		z-index: 0;
+// 	}
 	
-	span {
-		display: flex;
-		position: relative;
-		z-index: 1;
-	}
+// 	span {
+// 		display: flex;
+// 		position: relative;
+// 		z-index: 1;
+// 	}
 	
-	.icon {
-		line-height: 2.125rem;
-		font-size: 1.25rem;
-		margin: 0 .25rem 0 -.25rem;
-	}
+// 	.icon {
+// 		line-height: 2.125rem;
+// 		font-size: 1.25rem;
+// 		margin: 0 .25rem 0 -.25rem;
+// 	}
 	
-	&.block {
-		align-self: stretch;
-		width: 100%;
-		flex: 1 1 auto;
-	}
-}
+// 	&.block {
+// 		align-self: stretch;
+// 		width: 100%;
+// 		flex: 1 1 auto;
+// 	}
+// }
 
  /*
  * =============================
@@ -508,6 +612,7 @@ nav {
     transition: background-color .4s;
     width: 100%;
     margin: 0 auto;
+    padding: 1em 2em;
   }
 
   nav {

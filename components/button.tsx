@@ -62,9 +62,7 @@ function Button({className, children, style, buttonType, disabled, onClick}: But
   return (
     <>
       <button className={classes.join(' ')} style={style} disabled={disabled} onClick={onClick}>
-        <span className="icon material-icons">ma</span>
         {children}
-        <span className='loader'></span>
       </button>
     </>
   )

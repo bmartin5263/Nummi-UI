@@ -2,15 +2,16 @@
 * Basic Colors
 */
 
+$white: #ffffff;
 $white-gray: #f7f7f7;
 $lightest-gray: #E6E6E6;
-$lighter-gray: #CCCCCC;
+$lighter-gray: #E0E0E0;
 $light-gray: #B3B3B3;
 $gray: #999999;
 $dark-gray: #808080;
 $darker-gray: #666666;
 $darkest-gray: #444444;
-$division-gray: #333333;
+$division-gray: #262626;
 $background-gray: #1A1A1A;
 
 $lighter-green: #2fffb3;
@@ -28,7 +29,7 @@ $red: #FF6666;
 $normal-light: $gray;
 $normal-hover-light: $light-gray;
 $normal-active-light: $dark-gray;
-$normal-disabled-light: $lightest-gray;
+$normal-disabled-light: $lighter-gray;
 
 $normal-dark: $dark-gray;
 $normal-hover-dark: $gray;
