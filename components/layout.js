@@ -22,9 +22,9 @@ export default function Layout({ children }) {
       <div className="content">
         <div className='flex-content'>
           <Navigation />
-          <main>{children}</main>
-          {/* <Footer/> */}
           <RowBreak/>
+          <main style={{display: 'block', width: '100%'}}>{children}</main>
+          {/* <Footer/> */}
         </div>
       </div>
     </>

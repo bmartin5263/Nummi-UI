@@ -7,6 +7,8 @@ export default function Home() {
         <Head>
           <title>Nummi</title>
         </Head>
+        <div className='reg-box'></div>
+        <div className='form-box'></div>
         <div className='flex-wrapped' style={{justifyContent: 'center'}}>
           <RowBreak height={"4em"}></RowBreak>
           <h1 className="center-header">Nummi</h1>

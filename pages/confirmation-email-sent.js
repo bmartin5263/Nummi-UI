@@ -3,12 +3,13 @@ import RowBreak from '../components/rowBreak';
 import nummiClient from '../util/nummiClient';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Banner from '../components/banner';
+import Banner, { BannerType } from '../components/banner';
 
 export default function EmailConfirmationSent() {
   const router = useRouter()
   const [clicked, setClicked] = useState(false);
-  const [bannerError, setBannerError] = useState("");
+  const [bannerText, setBannerText] = useState("");
+  const [bannerType, setBannerType] = useState(BannerType.ERROR);
 
   const handleResendEmail = async (event) => {
     event.preventDefault();
@@ -17,9 +18,12 @@ export default function EmailConfirmationSent() {
     try {
       const url = "/resend-confirmation-email?email=" + router.query.email;
       await nummiClient.post(url, {});
+      setBannerType(BannerType.INFO);
+      setBannerText("Confirmation Email Re-sent");
     }
     catch (error) {
-      setBannerError(error.response?.data?.userMessage ?? "Unable to resend confirmation email");
+      setBannerType(BannerType.ERROR);
+      setBannerText(error.response?.data?.userMessage ?? "Unable to resend confirmation email");
     }
     finally {
       setClicked(false);
@@ -31,8 +35,8 @@ export default function EmailConfirmationSent() {
         <Head>
           <title>Confirmation Email Sent</title>
         </Head>
-        <Banner className={(bannerError ? " banner-error" : " banner-disabled")}>
-          {bannerError}
+        <Banner bannerType={bannerType} omnipresent>
+          {bannerText}
         </Banner>
         <div className='flex-wrapped' style={{justifyContent: 'center'}}>
           <div className='row-break-no-mobile'></div>

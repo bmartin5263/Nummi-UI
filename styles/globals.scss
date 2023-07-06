@@ -36,7 +36,7 @@ body.dark {
 
 h1 {
   transition-duration: 0.4s;
-  color: $dark-gray;
+  color: $darkest-gray;
 }
 
 .dark h1 {
@@ -191,11 +191,11 @@ nav {
   background-color: $button-enabled-dark;
 }
 
-.button:hover {
+.dark .button:hover {
   background-color: $button-hover-dark;
 }
 
-.button:active {
+.dark .button:active {
   background-color: $button-active-dark;
   transition-duration: 0.0s;
 }
@@ -235,7 +235,6 @@ nav {
   font-weight: 100;
   font-size: 4em;
   line-height: 1.3em;
-  color: $dark-gray;
   text-align: center;
 }
 
@@ -323,46 +322,57 @@ nav {
  * =============================
  */
 
- .banner {
-  width: 100%;
-  min-height: 3em;
-  line-height: 3em;
-  vertical-align: middle;
-  text-align: center;
-  font-family: Avenir;
-  transition-duration: 0.3s;
-  margin-bottom: 1em;
- }
+//  .banner {
+//   width: 100%;
+//   min-height: 3em;
+//   line-height: 3em;
+//   vertical-align: middle;
+//   text-align: center;
+//   font-family: Avenir;
+//   transition-duration: 0.3s;
+//   margin-bottom: 1em;
+//  }
 
- .banner-info {
-  background-color: #CCE5FF;
-  color: #004C99;
- }
+//  .banner-info {
+//   background-color: #CCE5FF;
+//   color: #004C99;
+//  }
 
- .dark .banner-info {
-  background-color: #003265;
-  color: #8dc4ff;
- }
+//  .dark .banner-info {
+//   background-color: #003265;
+//   color: #8dc4ff;
+//  }
 
- .banner-error {
-  background-color: #FFCCCC;
-  color: #660000;
- }
+//  .banner-error {
+//   background-color: #FFCCCC;
+//   color: #660000;
+//  }
 
- .dark .banner-error {
-  background-color: #660000;
-  color: #ffacac;
- }
+//  .dark .banner-error {
+//   background-color: #660000;
+//   color: #ffacac;
+//  }
 
- .banner-disabled {
-  opacity: 0%;
- }
+//  .banner-disabled {
+//   opacity: 0%;
+//  }
 
  /*
  * =============================
  * --------- FORM BOX ----------
  * =============================
  */
+
+ .reg-box {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 50%;
+  height: 10em;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  background-color: $white-gray;
+ }
 
  .form-box {
   display: flex;
@@ -391,6 +401,9 @@ nav {
   background-color: $division-gray;
 }
 
+.dark .reg-box {
+  background-color: $division-gray;
+}
 
 @media screen and (max-width: 1200px) {
   .content {

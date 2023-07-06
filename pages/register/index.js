@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import TextField from '../../components/textField';
 import RowBreak from '../../components/rowBreak';
 import Link from 'next/link';
-import Banner from '../../components/banner';
+import Banner, { BannerType } from '../../components/banner';
 import nummiClient from '../../util/nummiClient';
 import { useRouter } from 'next/router';
 
@@ -118,8 +118,7 @@ function RegisterPage() {
         <title>Register</title>
       </Head>
       <article>
-        <RowBreak height={".6em"}/>
-        <Banner className={styles.banner + (bannerError ? " banner-error" : " banner-disabled")}>
+        <Banner bannerType={BannerType.ERROR} omnipresent>
           {bannerError}
         </Banner>
         <form id={styles.form} className='form-box' onSubmit={handleSubmit}>

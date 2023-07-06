@@ -26,7 +26,12 @@ export async function getServerSideProps(context) {
       email: query.email,
       token: query.token
     })
-    return {props: {}};
+    return {
+      redirect: {
+        destination: '/login?email=' + encodeURI(query.email),
+        permanent: false
+      }
+    }
   }
   catch (error) {
     log(error);

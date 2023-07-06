@@ -8,9 +8,14 @@ function UserPage() {
       <Head>
         <title>User</title>
       </Head>
+      <article>
+
+      </article>
       <p>User</p>
     </>
   );
 }
+
+
 
 export default UserPage

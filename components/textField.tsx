@@ -9,11 +9,15 @@ type TextFieldProps = {
   title: string, 
   warning: string, 
   type: string, 
-  className: string
+  className: string,
+  initialValue: string,
 }
 
-function TextField({name, title, warning, type, className}: TextFieldProps) {
-  const [text, setText] = useState("");
+function TextField({name, title, warning, type, className, initialValue}: TextFieldProps) {
+  if (initialValue === undefined || initialValue === null) {
+    initialValue = "";
+  }
+  const [text, setText] = useState(initialValue);
 
   const defaultStyle = {
     display: 'flex',
@@ -33,7 +37,8 @@ function TextField({name, title, warning, type, className}: TextFieldProps) {
         <p className={getWarningClass(text, warning)}>{warning}</p>
       </div>
       <div style={defaultStyle}>
-        <input 
+        <input
+          value={text}
           className={styles.textBox} 
           id={name} 
           name={name} 
