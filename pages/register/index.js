@@ -131,7 +131,7 @@ function RegisterPage() {
           <RowBreak height="1.8em"/>
           <div className={styles.linkGroup}>
             <Link href="/login" id={styles.loginButton} className='inline'>Login</Link>
-            <Link href="/resend-confirmation-email" className='inline'>Resend Confirmation Email</Link>
+            <Link href="/resend-email" className='inline'>Resend Confirmation Email</Link>
           </div>
         </form>
       </article>
