@@ -4,8 +4,11 @@ import { useContext } from "react";
 import ThemeContext from '../components/themeContext'
 import Footer from './footer';
 import RowBreak from './rowBreak';
+import Logo from './logo';
+import styles from "styles/navigation.module.scss";
 
 export default function Layout({ children }) {
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   return (
     <>
       <Head>
@@ -18,11 +21,12 @@ export default function Layout({ children }) {
         <meta name="application-name" content="Nummi"></meta>
         <meta name="msapplication-TileColor" content="#00a300"></meta>
         <meta name="theme-color" content="#585858"></meta>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
       <div className="content">
         <div className='flex-content'>
+          <Logo/>
           <Navigation />
+          <img id={styles.toggleDarkModeButton} className='button' onClick={toggleDarkMode} src={darkMode ? "images/sun2.png" : "images/moon2.png"}/>
           <RowBreak/>
           <main style={{display: 'block', width: '100%'}}>{children}</main>
           {/* <Footer/> */}

@@ -12,11 +12,11 @@ import { useRouter } from 'next/router';
 
 function RegisterPage() {
   const [clicked, setClicked] = useState(false);
-  const [bannerError, setBannerError] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [retypedPasswordError, setRetypedPasswordError] = useState("");
+  const [bannerError, setBannerError] = useState(null);
+  const [usernameError, setUsernameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [retypedPasswordError, setRetypedPasswordError] = useState(null);
   const router = useRouter()
 
   const handleSubmit = async (event) => {

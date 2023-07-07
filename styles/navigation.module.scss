@@ -1,13 +1,14 @@
 @use 'variables' as *;
 
 #toggleDarkModeButton {
-  height: 2.4em;
-  width: 2.4em;
+  height: 2.5em;
+  width: 2.5em;
 
   color: #ffffff;
   padding: .3em;
   margin-left: 1em;
   margin-bottom: .5em;
+  margin-top: .7em;
 }
 
 #loginButton {
@@ -155,13 +156,13 @@
     width: 100%;
   }
 
-  #toggleDarkModeButton {
-    margin: 0;
-    flex-grow: 1;
-    width: 100%;
-  }
+  // #toggleDarkModeButton {
+  //   margin: 0;
+  //   flex-grow: 1;
+  //   width: 100%;
+  // }
 
-  .logo {
-    font-size: 0em;
+  #toggleDarkModeButton {
+    margin-left: auto;
   }
 }

@@ -8,12 +8,9 @@ export default function Home() {
         <Head>
           <title>Nummi</title>
         </Head>
-        <article> 
-          <Banner bannerType={BannerType.SUCCESS}>
-            Hello
-          </Banner>
+        <article>
           <div className='flex-wrapped' style={{justifyContent: 'center'}}>
-            <RowBreak height={"2em"}/>
+            <RowBreak height={"4em"}/>
             <h1 className="center-header">Nummi</h1>
             <RowBreak/>
             <h2 className="center-header2">Algorithmic Trading Bots</h2>

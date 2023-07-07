@@ -22,7 +22,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+        </Head>
         <body className={this.props.theme == "dark" ? "dark" : ""}>
           <Main />
           <NextScript />

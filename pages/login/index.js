@@ -34,14 +34,10 @@ function LoginPage({ csrfToken }) {
         </Banner>
         <form id={styles.form} className='form-box' method="post" action="/api/auth/callback/credentials">
           <h1>Login</h1>
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-          <RowBreak height={".8em"}/>
-          <TextField className={styles.textField} name="username" title="Username or Email" initialValue={email}/>
-          <RowBreak height={".6em"}/>
-          <TextField className={styles.textField} name="password" title="Password" type="password"/>
-          <RowBreak height={"1.8em"}/>
-          <button id={styles.loginButton} type="submit" className="button button-primary">Login</button>
-          <RowBreak height={"1.8em"}/>
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} /><RowBreak height={".8em"}/>
+          <TextField className={styles.textField} name="username" title="Username or Email" initialValue={email}/><RowBreak height={".6em"}/>
+          <TextField className={styles.textField} name="password" title="Password" type="password"/><RowBreak height={"1.8em"}/>
+          <button id={styles.loginButton} type="submit" className="button button-primary">Login</button><RowBreak height={"1.8em"}/>
           <div className={styles.linkGroup}>
             <Link href="/register" id={styles.registerButton} className='inline'>Create an Account</Link>
             <Link href="/forgot-password" id={styles.forgotPasswordButton} className='inline'>Forgot Password</Link>
