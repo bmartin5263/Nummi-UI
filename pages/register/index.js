@@ -78,6 +78,7 @@ function RegisterPage() {
         retypedPasswordField.setErrorMessage("Passwords do not match")
       }
     },
+    onSubmit: (req) => nummiClient.post("register", req),
     onSuccess: (req, res) => {
       router.push("/confirmation-email-sent?email=" + req.email)
     },
@@ -93,7 +94,7 @@ function RegisterPage() {
         <Banner bannerType={BannerType.ERROR} omnipresent>
           {form.generalError}
         </Banner>
-        <form id={styles.form} className='form-box' onSubmit={form.submit}>
+        <form className='form-box2' onSubmit={form.submit}>
           <h1>Register</h1>
           <RowBreak height=".8em"/>
           <TextField

@@ -6,19 +6,35 @@ import styles from "styles/navigation.module.scss";
 import { signOut } from 'next-auth/react';
 import useAuth from '../hooks/useAuth';
 import useLog from '../hooks/useLog';
+import Logo from './logo';
+import Button, { ButtonShape, ButtonType } from './button';
+import Icon from './icon';
+import RowBreak from './rowBreak';
 
 function Navigation() {
   const router = useRouter();
   const isAuthenticated = useAuth(false);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const log = useLog("Navigation");
 
   return (
-    <nav>
-      {createLink("/strategies", "Strategies", router.pathname)}
-      {isAuthenticated && createLink("/trading", "Trading", router.pathname)}
-      {isAuthenticated && createLink("/bots", "Bots", router.pathname)}
-      {isAuthenticated && createLink("/simulations", "Simulations", router.pathname)}
-    </nav>
+    <>
+      <nav>
+        <Logo/>
+          {createLink("/strategies", "Strategies", router.pathname)}
+          {isAuthenticated && createLink("/trading", "Trading", router.pathname)}
+          {isAuthenticated && createLink("/bots", "Bots", router.pathname)}
+          {isAuthenticated && createLink("/simulations", "Simulations", router.pathname)}
+        {/* <div>
+        </div> */}
+        {!isAuthenticated && <Link href="/login" id={styles.loginButton} className='button2 button2-primary'>Login</Link>}
+        {isAuthenticated && <button className='button' id={styles.signOutButton} onClick={() => signOut()}>Sign Out</button>}
+        {!isAuthenticated && <Link href="/register" id={styles.registerButton} className='button2'>Register</Link>}
+        <Button id={styles.toggleDarkModeButton} buttonType={ButtonType.BASIC} shape={ButtonShape.IMAGE} onClick={toggleDarkMode}>
+          {darkMode ? <Icon>light_mode</Icon> : <Icon>dark_mode</Icon>}
+        </Button>
+      </nav>
+    </>
   );
 }
 

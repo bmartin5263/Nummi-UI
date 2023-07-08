@@ -93,8 +93,9 @@ nav {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-  align-items: flex-end;
-  margin-bottom: .5em;
+  align-items: center;
+  height: 3.5em;
+  margin-bottom: .4em;
   // background-color: #003265;
 }
 
@@ -112,7 +113,6 @@ nav {
   position: relative;
   width: 40px;  // doesn't matter
   height: 40px; // doesn't matter
-  background-color: red;
 }
 .lds-ellipsis div {
   position: absolute;
@@ -192,6 +192,7 @@ nav {
   cursor: pointer;
   border-radius: 8px;
   transition-duration: .2s;
+  background-color: blue;
 }
 
 .button:hover {
@@ -207,6 +208,7 @@ nav {
 
 .button-primary {
   background-color: $button-primary-enabled-light;
+  background-color: blue;
 }
 
 .button-primary:hover {
@@ -229,6 +231,7 @@ nav {
 
 .dark .button {
   background-color: $button-enabled-dark;
+  background-color: blue;
 }
 
 .dark .button:hover {
@@ -244,6 +247,7 @@ nav {
 
 .dark .button-primary {
   background-color: $button-primary-enabled-dark;
+  background-color: blue;
 }
 
 .dark .button-primary {
@@ -302,25 +306,19 @@ nav {
   align-items: center;
   justify-content: center;
 
-  font-weight: bold;
-  background-color: $button-enabled-light;
-  color: #ffffff;
   padding: 0 2em;
+  height: 2.5em;
   border-radius: 8px;
-  transition-duration: .2s;
-  min-height: 2.5em;
-  // padding: 1em 1em;
 
-  // span {
-	// 	display: flex;
-	// 	position: relative;
-	// 	z-index: 1;
-	// }
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+
+  background-color: $button-enabled-light;
+  transition-duration: .2s;
 
   .icon {
-		// line-height: 2.125rem;
 		font-size: 1.25em;
-		// margin: 0 .25rem 0 -.25rem;
 	}
 
   .loader {
@@ -351,6 +349,15 @@ nav {
     
     &:active {
       background-color: $button-primary-active-light;
+    }
+  }
+
+  &.button2-image {
+    aspect-ratio: 1 / 1;
+    padding: .2em;
+
+    & .icon {
+      font-size: 2.0em;
     }
   }
 
@@ -553,7 +560,6 @@ nav {
     width: 100%; 
     text-align: center;
     transition-duration: 0.4s;
-    margin: .3em 0;
   }
 
   & .textBox {
@@ -589,11 +595,15 @@ nav {
   .form-box2 {
     transition: width .2s;
     transition: background-color .4s;
-    width: 70%;
+    width: 60%;
   }
 }
 
 @media screen and (max-width: 700px) {
+  .content {
+    width: 93%;
+  }
+
   .form-box {
     transition: width .2s;
     transition: background-color .4s;
@@ -606,14 +616,11 @@ nav {
     transition: background-color .4s;
     width: 100%;
     margin: 0 auto;
-    padding: 1em 2em;
+    padding: 1.5em 2em;
   }
 
   nav {
-    flex-direction: column;
-    align-items: flex-start;
     margin-bottom: .1em;
-    order: 10;
   }
 
   .row-break-no-mobile {

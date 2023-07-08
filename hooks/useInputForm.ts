@@ -10,8 +10,10 @@ const log = useLog("InputForm");
 
 export type InputFormTemplate = {
   fields: FieldTemplate[],
+  defaultErrorMessage: string,
 
   preSubmitValidation: (fields: Map<string, Field>) => string;
+  onSubmit: (req: any) => Promise<AxiosResponse<any, any>>;
   onSuccess: (req: any, res: AxiosResponse<any, any>) => void;
   fieldErrorExtractor: (res: AxiosResponse<any, any>) => FieldError[]
 }
@@ -26,6 +28,7 @@ export type InputForm = {
   generalError: string,
 
   submit: EventHandler<FormEvent<HTMLFormElement>>;
+  validate(): boolean;
   getFieldValue(name: string): string;
   getField(name: string): Field;
 }
@@ -52,34 +55,50 @@ function useInputForm(props: InputFormTemplate): InputForm {
     fields.set(field.name, useInputField(field))
   }
 
-  const handleSubmit = async (event) => {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault()
-    setGeneralError(null);
-    const data: any = {};
-
-    let failed = false;
+  const doValidate = (): boolean => {
+    let success = true;
 
     const newGeneralError = preSubmitValidation(fields);
     if (newGeneralError != null) {
       setGeneralError(newGeneralError);
-      failed = true;
+      success = false;
     }
 
     for (const [name, field] of fields) {
       if (field.validate() != null) {
-        failed = true;
+        success = false;
       }
-      field.insertValueIntoRequest(data);
     }
 
-    if (failed) {
+    return success;
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    if (props.onSubmit != null) {
+      // Stop the form from submitting and refreshing the page.
+      event.preventDefault()
+    }
+    setGeneralError(null);
+    const data: any = {};
+
+    let success: boolean = doValidate();
+
+    if (!success) {
+      event.preventDefault()
       return;
+    }
+    else if (props.onSubmit == null) {
+      setSubmitted(true);
+      return event;
+    }
+
+    for (const [name, field] of fields) {
+      field.insertValueIntoRequest(data);
     }
 
     setSubmitted(true);
     try {
-      const res = await nummiClient.post("register", data);
+      const res = await props.onSubmit(data);
       log(res.data);
       onSuccess(data, res);
     }
@@ -100,7 +119,12 @@ function useInputForm(props: InputFormTemplate): InputForm {
         }
       }
       else {
-        setGeneralError(error.response?.data?.userMessage ?? "Unable to Register at this time. Please try again in a few minutes");
+        if (error.response?.data?.userMessage != null) {
+          setGeneralError(error.response?.data?.userMessage);
+        }
+        else {
+          setGeneralError(props.defaultErrorMessage);
+        }
       }
     }
   }
@@ -109,8 +133,9 @@ function useInputForm(props: InputFormTemplate): InputForm {
     submitted: submitted,
     generalError: generalError,
     submit: async (event) => {
-      handleSubmit(event)
+      return handleSubmit(event)
     },
+    validate: () => doValidate(),
     getField: (name: string): Field => fields.get(name),
     getFieldValue: (name: string): string => fields.get(name)?.inputValue
   }

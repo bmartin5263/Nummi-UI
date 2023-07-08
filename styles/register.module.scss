@@ -2,14 +2,8 @@
   padding: 2em 0;
 }
 
-.textField {
-  margin: 0 auto;
-  width: 70%;
-}
-
 #registerButton {
-  margin: 0 auto;
-  width: 70%;
+  width: 100%;
 }
 
 #loginButton {
@@ -18,7 +12,7 @@
 
 .linkGroup {
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -28,16 +22,12 @@
 }
 
 @media screen and (max-width: 700px) {
-  .textField {
-    width: 90%;
-  }
-
   #registerButton {
-    width: 90%;
+    width: 100%;
   }
 
   .linkGroup {
-    width: 90%;
+    width: 100%;
   }
 
   .banner {

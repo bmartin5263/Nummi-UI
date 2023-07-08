@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Banner, { BannerType } from '../components/banner';
-import Button, { ButtonType } from '../components/button'
+import Button, { ButtonShape, ButtonType } from '../components/button'
 import { useState } from 'react';
 
 export default function Test() {
@@ -33,15 +33,14 @@ export default function Test() {
           <Banner bannerType={bannerType} omnipresent>
             Hello
           </Banner>
-          <Button onClick={clickButton} disabled={!enabled}>
+          <Button onClick={clickButton} disabled={!enabled} style={{width: '19em'}}>
             <span className="icon left material-icons">mail</span>
             Hello
             {!enabled && <span className='loader'></span>}
           </Button>
           <br></br>
-          <Button onClick={clickButton} disabled={!enabled} buttonType={ButtonType.PRIMARY}>
-            <span className="icon left material-icons">mail</span>
-            Hello
+          <Button onClick={clickButton} disabled={!enabled} buttonType={ButtonType.PRIMARY} shape={ButtonShape.IMAGE}>
+            <span className="icon left material-icons">light_mode</span>
             {!enabled && <span className='loader'></span>}
           </Button>
           <br></br>

@@ -14,6 +14,7 @@ export type ButtonProps = {
   style: React.CSSProperties,
 
   buttonType: ButtonType,
+  shape: ButtonShape,
   disabled: boolean,
   onClick: (e: MouseEvent<HTMLButtonElement>) => void
 }
@@ -30,6 +31,17 @@ export class ButtonType {
   }
 }
 
+export class ButtonShape {
+  css: string;
+
+  static NORMAL = new ButtonType("button2-normal")
+  static IMAGE = new ButtonType("button2-image")
+
+  constructor(css: string) {
+    this.css = css
+  }
+}
+
 export class ButtonEffect {
   css: string;
 
@@ -40,12 +52,15 @@ export class ButtonEffect {
   }
 }
 
-function Button({id, className, type, children, style, buttonType, disabled, onClick}: ButtonProps) {
+function Button({id, className, type, children, style, buttonType, disabled, shape, onClick}: ButtonProps) {
   if (buttonType == null) {
     buttonType = ButtonType.BASIC;
   }
+  if (shape == null) {
+    shape = ButtonShape.NORMAL;
+  }
 
-  var classes = ["button2", buttonType.css];
+  var classes = ["button2", buttonType.css, shape.css];
   if (className != null) {
     classes.push(className);
   }
