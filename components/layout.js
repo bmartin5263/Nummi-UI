@@ -6,9 +6,13 @@ import Footer from './footer';
 import RowBreak from './rowBreak';
 import Logo from './logo';
 import styles from "styles/navigation.module.scss";
+import { signOut } from 'next-auth/react';
+import useAuth from '../hooks/useAuth';
+import Link from 'next/link';
 
 export default function Layout({ children }) {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const isAuthenticated = useAuth(false);
   return (
     <>
       <Head>
@@ -26,6 +30,9 @@ export default function Layout({ children }) {
         <div className='flex-content'>
           <Logo/>
           <Navigation />
+          {!isAuthenticated && <Link href="/login" id={styles.loginButton} className='button button-primary'>Login</Link>}
+          {isAuthenticated && <button className='button' id={styles.signOutButton} onClick={() => signOut()}>Sign Out</button>}
+          {!isAuthenticated && <Link href="/register" id={styles.registerButton} className='button'>Register</Link>}
           <img id={styles.toggleDarkModeButton} className='button' onClick={toggleDarkMode} src={darkMode ? "images/sun2.png" : "images/moon2.png"}/>
           <RowBreak/>
           <main style={{display: 'block', width: '100%'}}>{children}</main>

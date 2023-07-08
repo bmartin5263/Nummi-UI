@@ -163,29 +163,6 @@ nav {
   }
 }
 
-
-.loader {
-  margin-left: 1em;
-  display: inline-block;
-  border: 3px solid $darkest-gray;
-  border-top: 3px solid $white-gray;
-  border-radius: 50%;
-  width: 1.2em;
-  height: 1.2em;
-  animation: spin 1s linear infinite;
-  transition: border-color .2s;
-}
-
-.dark .loader {
-  border: 3px solid $division-gray;
-  border-top: 3px solid white;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 /*
  * =============================
  * --------- BUTTON ------------
@@ -295,27 +272,44 @@ nav {
 
 // Basic Button
 
+.loader {
+  display: inline-block;
+  border: .2em solid $darkest-gray;
+  border-top: .2em solid $white-gray;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  animation: spin 1s linear infinite;
+  transition: border-color .2s;
+}
+
+.dark .loader {
+  border: .2em solid $division-gray;
+  border-top: .2em solid white;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .icon {
   font-size: 1em;
-
-  &.left {
-    margin-right: .5em;
-  }
 }
 
 .button2 {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   font-weight: bold;
   background-color: $button-enabled-light;
   color: #ffffff;
   padding: 0 2em;
-  text-align: center;
   border-radius: 8px;
   transition-duration: .2s;
   min-height: 2.5em;
-  min-width: 11em;
+  // padding: 1em 1em;
 
   // span {
 	// 	display: flex;
@@ -330,8 +324,8 @@ nav {
 	}
 
   .loader {
-    border: 3px solid $darkest-gray;
-    border-top: 3px solid $white;
+    border: .2em solid $darkest-gray;
+    border-top: .2em solid $white;
   }
 
   &:hover {
@@ -347,8 +341,8 @@ nav {
     background-color: $button-primary-enabled-light;
 
     .loader {
-      border: 3px solid $darkest-green;
-      border-top: 3px solid $white-gray;
+      border: .2em solid $darkest-green;
+      border-top: .2em solid $white-gray;
     }
   
     &:hover {
@@ -369,8 +363,8 @@ nav {
     }
 
     .loader {
-      border: 3px solid $gray;
-      border-top: 3px solid $white-gray;
+      border: .2em solid $gray;
+      border-top: .2em solid $white-gray;
     }
   }
 }
@@ -382,8 +376,8 @@ nav {
   background-color: $button-enabled-dark;
 
   .loader {
-    border: 3px solid $division-gray;
-    border-top: 3px solid $lighter-gray;
+    border: .2em solid $division-gray;
+    border-top: .2em solid $lighter-gray;
   }
 
   &:hover {
@@ -416,8 +410,8 @@ nav {
     }
 
     .loader {
-      border: 3px solid $division-gray;
-      border-top: 3px solid $lighter-gray;
+      border: .2em solid $division-gray;
+      border-top: .2em solid $lighter-gray;
     }
   }
 }

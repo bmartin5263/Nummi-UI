@@ -1,81 +1,78 @@
 import styles from 'styles/textField.module.scss'
 import useLog from '../hooks/useLog';
 import { useState } from 'react';
+import { Field } from '../hooks/useInputField';
 
 const log = useLog("TextField")
 
 type TextFieldProps = {
-  name: string, 
-  title: string, 
-  warning: string, 
+  value: string, 
+  placeholder: string,
+  error: string, 
+
+  field: Field,
+
+  showError: boolean,
   type: string, 
+  identifier: string,
+  title: string,
   className: string,
-  initialValue: string,
   spellCheck: boolean,
-  
-  validator: (text: string) => string;
+
+  onChange: (newValue: string) => string;
+  onExit: () => void;
 }
 
-function TextField({name, title, warning, type, className, initialValue, spellCheck, validator}: TextFieldProps) {
-  if (initialValue == null) {
-    initialValue = "";
-  }
-  if (validator == null) {
-    validator = (text: string) => null;
-  }
-
-  const [text, setText] = useState(initialValue);
-  const [error, setError] = useState(warning);
-  const [exited, setExited] = useState(false);
-
-  log("rerender name=" + name + " title=" + title + " warning=" + warning + " error=" + error + " text=" + text);
-
-
+function TextField(props: TextFieldProps) {
   const defaultStyle = {
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%'
   } as const;
 
-  const staticValidate = (text: string) => {
-    log("Validate " + text)
-    if (error == null) {
-      let newError = validator(text);
-      log("error " + newError)
-      setError(newError);
+  const value = props.value ?? props.field.inputValue;
+  const error = props.error ?? props.field.errorMessage;
+  const showError = props.showError ?? props.field.inErrorState;
+  const identifier = props.identifier ?? props.field.name;
+
+  let onChange = (str: string) => {};
+  let onExit = () => {};
+  if (props.field != null) {
+    if (props.onChange == null) {
+      onChange = (newValue: string) => props.field.update(newValue);
+    }
+    if (props.onExit == null) {
+      onExit = () => props.field.enableValidations()
     }
   }
 
   const handleChange = (event) => {
     let value: string = event.target.value; 
-    setText(value);
-
-    if (exited) {
-      staticValidate(value);
+    let overriddenValue = onChange(value);
+    if (overriddenValue != null) {
+      event.target.value = overriddenValue;
     }
   }
 
   const handleBlur = (event) => {    
-    let value: string = event.target.value; 
-    setExited(true);
-    staticValidate(value);
+    onExit();
   }
 
   return (
-    <div className={"textBox " + className}>
+    <div className={"textBox " + props.className}>
       <div style={defaultStyle}>
-        <p className={getTitleClass(text)}>{title}</p>
-        <p className={getWarningClass(error)}>{error}</p>
+        <p className={getTitleClass(value)}>{props.title}</p>
+        <p className={getWarningClass(showError)}>{error}</p>
       </div>
       <div style={defaultStyle}>
         <input
-          spellCheck={spellCheck}
-          value={text}
+          spellCheck={props.spellCheck}
+          value={value}
           className={styles.textBox} 
-          id={name} 
-          name={name} 
-          type={type ?? "text"}
-          placeholder={title}
+          id={identifier} 
+          name={identifier} 
+          type={props.type == null ? "text" : props.type}
+          placeholder={props.placeholder}
           onChange={handleChange}
           onBlur={handleBlur}
         />
@@ -84,10 +81,9 @@ function TextField({name, title, warning, type, className, initialValue, spellCh
   );
 }
 
-function getWarningClass(warning: string) {
+function getWarningClass(showError: boolean) {
   const classes = [styles.headerText, styles.errorText];
-  if (warning == null) {
-    log("hiding warning " + warning)
+  if (!showError) {
     classes.push(styles.headerTextHidden);
   }
   return classes.join(" ");

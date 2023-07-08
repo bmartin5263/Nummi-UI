@@ -8,107 +8,81 @@ import RowBreak from '../../components/rowBreak';
 import Link from 'next/link';
 import Banner, { BannerType } from '../../components/banner';
 import nummiClient from '../../util/nummiClient';
+import { extractErrors } from '../../util/utils';
 import { useRouter } from 'next/router';
+import useLog from '../../hooks/useLog';
+import useInputField from '../../hooks/useInputField'
+import useInputForm from '../../hooks/useInputForm'
+import Button, { ButtonType } from '../../components/button';
+
+const log = useLog("RegisterPage")
 
 function RegisterPage() {
-  const [clicked, setClicked] = useState(false);
-  const [bannerError, setBannerError] = useState(null);
-  const [usernameError, setUsernameError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [retypedPasswordError, setRetypedPasswordError] = useState(null);
-  const router = useRouter()
-
-  const handleSubmit = async (event) => {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault()
-
-    const username = event.target.username?.value ?? "";
-    const email = event.target.email?.value ?? "";
-    const password = event.target.password?.value ?? "";
-    const retypedPassword = event.target.retypedPassword?.value ?? "";
-
-    setClicked(true);
-    setEmailError("");
-    setUsernameError("");
-    setPasswordError("");
-    setBannerError("");
-    setRetypedPasswordError("");
-
-    let failed = false;
-    if (email == null || email == undefined || email == "") {
-      setEmailError("Email is required");
-      failed = true;
-    }
-    else if (!email.includes("@") || !email.includes(".")) {
-      setEmailError("Invalid Email Address");
-      failed = true;
-    }
-
-    if (username == null || username == undefined || username == "") {
-      setUsernameError("Username is required");
-      failed = true;
-    }
-    else if (username.length > 20) {
-      setUsernameError("Username cannot be more than 20 characters");
-      failed = true;
-    }
-
-    if (password == null || password == undefined || password == "") {
-      setPasswordError("Password is required");
-      failed = true;
-    }
-    else if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters");
-      failed = true;
-    }
-    
-    if (password !== retypedPassword) {
-      setRetypedPasswordError("Passwords do not match");
-      failed = true;
-    }
-
-    if (failed) {
-      setClicked(false);
-      return;
-    }
- 
-    // Get data from the form.
-    const data = {
-      username: username,
-      email: email,
-      password: password
-    }
-
-    try {
-      const res = await nummiClient.post("register", data);
-      console.log(res.data);
-      router.push("/confirmation-email-sent?email=" + email)
-    }
-    catch (error) {
-      setClicked(false);
-      const data = error.response?.data;
-      if (data?.subErrors && Array.isArray(data.subErrors)) {
-        for (const subError of data.subErrors) {
-          if (subError.path === "username") {
-            setUsernameError(subError.message);
+  const router = useRouter();
+  const form = useInputForm({
+    fields: [
+      {
+        name: "email",
+        validator: (email) => {
+          if (email == null || email == undefined || email == "") {
+            return "Email is required";
           }
-          else if (subError.path === "email") {
-            setEmailError(subError.message);
-          }
-          else if (subError.path === "password") {
-            setPasswordError(subError.message);
-          }
-          else {
-            console.log(subError);
+          else if (!email.includes("@") || !email.includes(".")) {
+            return "Not an Email Address";
           }
         }
+      },
+      {
+        name: "username",
+        validator: (username) => {
+          if (username == null || username == undefined || username == "") {
+            return "Username is required";
+          }
+          else if (username.length > 20) {
+            return "Username cannot be more than 20 characters";
+          }
+        }
+      },
+      {
+        name: "password",
+        shouldValidate: true,
+        validator: (password) => {
+          if (password == null || password == undefined || password == "") {
+            return "Password is required";
+          }
+          else if (password.length < 8) {
+            return "Password must be at least 8 characters";
+          }
+          else if (password.toUpperCase() == password) {
+            return "Passwords must have at least one lowercase ('a'-'z')";
+          }
+          else if (password.toLowerCase() == password) {
+            return "Passwords must have at least one uppercase ('A'-'Z')";
+          }
+          else if (!/\d/.test(password)) {
+            return "Passwords must have at least one digit ('0'-'9')."
+          }
+          else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+            return "Passwords must have at least one special character."
+          }
+        }
+      },
+      {
+        name: "retypedPassword"
       }
-      else {
-        setBannerError(error.response?.data?.userMessage ?? "Unable to Register at this time. Please try again in a few minutes");
+    ],
+    preSubmitValidation: (fields) => {
+      const passwordField = fields.get("password");
+      const retypedPasswordField = fields.get("retypedPassword");
+      if (passwordField.inputValue != retypedPasswordField.inputValue) {
+        retypedPasswordField.setErrorMessage("Passwords do not match")
       }
-    }
-  }
+    },
+    onSuccess: (req, res) => {
+      router.push("/confirmation-email-sent?email=" + req.email)
+    },
+    fieldErrorExtractor: (res) => extractErrors(res)
+  })
 
   return (
     <>
@@ -117,17 +91,48 @@ function RegisterPage() {
       </Head>
       <article>
         <Banner bannerType={BannerType.ERROR} omnipresent>
-          {bannerError}
+          {form.generalError}
         </Banner>
-        <form id={styles.form} className='form-box' onSubmit={handleSubmit}>
-          <h1>Register</h1><RowBreak height=".8em"/>
-          <TextField className={styles.textField} name="email" title="Email" warning={emailError}/><RowBreak height=".6em"/>
-          <TextField className={styles.textField} name="username" title="Username" warning={usernameError}/><RowBreak height=".6em"/>
-          <TextField className={styles.textField} name="password" type="password" title="Password" warning={passwordError}/><RowBreak height=".6em"/>
-          <TextField className={styles.textField} name="retypedPassword" type="password" title="Retype Password" warning={retypedPasswordError}/><RowBreak height="1.8em"/>
-          <button id={styles.registerButton} type="submit" className="button button-primary" disabled={clicked}>
-            {clicked ? <span className='loader'></span> : "Create Account"}
-          </button>
+        <form id={styles.form} className='form-box' onSubmit={form.submit}>
+          <h1>Register</h1>
+          <RowBreak height=".8em"/>
+          <TextField
+            field={form.getField("email")}
+            placeholder='Email'
+            type='email'
+            title="Email" 
+            className={styles.textField}
+          />
+          <RowBreak height=".6em"/>
+          <TextField
+            field={form.getField("username")}
+            placeholder='Username'
+            title="Username" 
+            className={styles.textField}
+          />
+          <RowBreak height=".6em"/>
+          <TextField
+            field={form.getField("password")}
+            placeholder='Password'
+            type='password'
+            title="Password" 
+            className={styles.textField}
+          />
+          <RowBreak height=".6em"/>
+          <TextField
+            field={form.getField("retypedPassword")}
+            placeholder='Retype Password'
+            type='password'
+            title="Retype Password" 
+            className={styles.textField}
+          />
+          <RowBreak height="1.8em"/>
+          <Button id={styles.registerButton} type="submit" buttonType={ButtonType.PRIMARY} disabled={form.submitted}>
+            {form.submitted 
+              ? <span style={{marginLeft: '.5em'}} className='loader'></span>
+              : <><span style={{marginRight: '.3em'}} className="icon material-icons">person_add</span>{"Create Account"}</>
+            }
+          </Button>
           <RowBreak height="1.8em"/>
           <div className={styles.linkGroup}>
             <Link href="/login" id={styles.loginButton} className='inline'>Login</Link>

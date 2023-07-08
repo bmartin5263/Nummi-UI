@@ -25,6 +25,10 @@
   // background-color: red;
 }
 
+:global(.dark) .errorText {
+  color: $light-red;
+}
+
 .textBox {
   border-color: $dark-gray;
   width: 100%;

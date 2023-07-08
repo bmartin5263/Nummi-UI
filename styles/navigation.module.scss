@@ -145,15 +145,19 @@
 
 @media screen and (max-width: 700px) {
   #loginButton {
-    margin: 0;
-    flex-grow: 1;
-    width: 100%;
+    // margin: 0;
+    // flex-grow: 1;
+    // width: 100%;
+    margin-left: auto;
+    height: 2em;
   }
 
   #registerButton {
-    margin: 0;
-    flex-grow: 1;
-    width: 100%;
+    // margin: 0;
+    // flex-grow: 1;
+    // width: 100%;
+    // margin-left: auto;
+    display: none;
   }
 
   // #toggleDarkModeButton {
@@ -162,7 +166,14 @@
   //   width: 100%;
   // }
 
+  .logo {
+    font-size: 2em;
+    margin-top: .2em;
+  }
+
   #toggleDarkModeButton {
-    margin-left: auto;
+    // margin-left: auto;
+    height: 2em;
+    width: 2em;
   }
 }

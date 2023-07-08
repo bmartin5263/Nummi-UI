@@ -7,7 +7,9 @@ import { MouseEvent } from 'react';
 
 
 export type ButtonProps = {
+  id: string,
   className: string, 
+  type: "button" | "submit" | "reset",
   children: React.ReactNode,
   style: React.CSSProperties,
 
@@ -38,7 +40,7 @@ export class ButtonEffect {
   }
 }
 
-function Button({className, children, style, buttonType, disabled, onClick}: ButtonProps) {
+function Button({id, className, type, children, style, buttonType, disabled, onClick}: ButtonProps) {
   if (buttonType == null) {
     buttonType = ButtonType.BASIC;
   }
@@ -61,7 +63,7 @@ function Button({className, children, style, buttonType, disabled, onClick}: But
 
   return (
     <>
-      <button className={classes.join(' ')} style={style} disabled={disabled} onClick={onClick}>
+      <button id={id} type={type} className={classes.join(' ')} style={style} disabled={disabled} onClick={onClick}>
         {children}
       </button>
     </>

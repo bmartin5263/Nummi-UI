@@ -18,9 +18,6 @@ function Navigation() {
       {isAuthenticated && createLink("/trading", "Trading", router.pathname)}
       {isAuthenticated && createLink("/bots", "Bots", router.pathname)}
       {isAuthenticated && createLink("/simulations", "Simulations", router.pathname)}
-      {!isAuthenticated && <Link href="/login" id={styles.loginButton} className='button button-primary'>Login</Link>}
-      {isAuthenticated && <button className='button' id={styles.signOutButton} onClick={() => signOut()}>Sign Out</button>}
-      {!isAuthenticated && <Link href="/register" id={styles.registerButton} className='button'>Register</Link>}
     </nav>
   );
 }
