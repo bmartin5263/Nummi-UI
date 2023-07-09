@@ -32,7 +32,7 @@ export default function EmailConfirmationSent() {
           <Banner bannerType={BannerType.ERROR} omnipresent>
             {form.generalError}
           </Banner>
-          <form className='form-box2'>
+          <form className='form-box'>
             <h1>Resend Confirmation Email</h1>
             <RowBreak height=".8em"/>
             <TextField
@@ -42,7 +42,7 @@ export default function EmailConfirmationSent() {
               title="Email" 
             />
             <RowBreak height={"1.8em"}/>
-            <Button type="submit" className="button2 button2-primary" style={{width: '100%'}} onClick={form.submit} disabled={form.submitted}>
+            <Button type="submit" className="button button-primary" style={{width: '100%'}} onClick={form.submit} disabled={form.submitted}>
               {form.submitted 
               ? <Loader/>
               : <><Icon name='mail' left/>Resend Email</>

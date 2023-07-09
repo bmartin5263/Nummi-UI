@@ -24,13 +24,13 @@ function StrategiesPage() {
               <td>Opportunist</td>
               <td>Nummi</td>
               <td>0</td>
-              <td><Button className='button2 button2-primary' style={{width: '100%'}}>Simulate</Button></td>
+              <td><Button className='button button-primary' style={{width: '100%'}}>Simulate</Button></td>
           </tr>
           <tr>
               <td>Mummy Dust</td>
               <td>Nummi</td>
               <td>3</td>
-              <td><Button className='button2 button2-primary' style={{width: '100%'}}>Simulate</Button></td>
+              <td><Button className='button button-primary' style={{width: '100%'}}>Simulate</Button></td>
           </tr>
         </table>
       </div>

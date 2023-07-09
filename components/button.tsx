@@ -23,8 +23,8 @@ export class ButtonType {
   css: string;
 
 
-  static BASIC = new ButtonType("button2-basic")
-  static PRIMARY = new ButtonType("button2-primary")
+  static BASIC = new ButtonType("button-basic")
+  static PRIMARY = new ButtonType("button-primary")
 
   constructor(css: string) {
     this.css = css
@@ -34,8 +34,8 @@ export class ButtonType {
 export class ButtonShape {
   css: string;
 
-  static NORMAL = new ButtonType("button2-normal")
-  static IMAGE = new ButtonType("button2-image")
+  static NORMAL = new ButtonType("button-normal")
+  static IMAGE = new ButtonType("button-image")
 
   constructor(css: string) {
     this.css = css
@@ -45,7 +45,7 @@ export class ButtonShape {
 export class ButtonEffect {
   css: string;
 
-  static SPINNING = new ButtonEffect("button2-basic")
+  static SPINNING = new ButtonEffect("button-basic")
 
   constructor(css: string) {
     this.css = css
@@ -60,7 +60,7 @@ function Button({id, className, type, children, style, buttonType, disabled, sha
     shape = ButtonShape.NORMAL;
   }
 
-  var classes = ["button2", buttonType.css, shape.css];
+  var classes = ["button", buttonType.css, shape.css];
   if (className != null) {
     classes.push(className);
   }

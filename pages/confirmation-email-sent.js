@@ -45,7 +45,7 @@ export default function EmailConfirmationSent() {
           <RowBreak/>
           <h2 className='center-header2'>Check your Inbox</h2>
           <RowBreak height={"4em"}/>
-          <Button className="button2" onClick={resendEmail.send} style={{width: '18.7em'}} disabled={resendEmail.sent || timer > 0}>
+          <Button className="button" onClick={resendEmail.send} style={{width: '18.7em'}} disabled={resendEmail.sent || timer > 0}>
             {resendEmail.sent ? <span className='loader'></span> : <><Icon name='email' style={{marginRight: '.3em'}}/>{"Resend Confirmation Email"}</>}
           </Button>
           <span style={{marginLeft: '2em', width: '2em'}}>

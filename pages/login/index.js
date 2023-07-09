@@ -61,7 +61,7 @@ function LoginPage({ csrfToken }) {
         <Banner bannerType={email == null ? BannerType.ERROR : BannerType.INFO} omnipresent>
           {bannerText}
         </Banner>
-        <form className='form-box2' method="post" action="/api/auth/callback/credentials">
+        <form className='form-box' method="post" action="/api/auth/callback/credentials">
           <h1>Login</h1>
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           <RowBreak height={".8em"}/>

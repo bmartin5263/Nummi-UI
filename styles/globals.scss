@@ -32,6 +32,7 @@ body.dark {
   transition: width .3s;
   width: 80%;
   margin: 0 auto;
+  padding-bottom: 3em;
 }
 
 h1 {
@@ -181,94 +182,6 @@ nav {
   outline: inherit;
 }
 
-// Basic Button
-
-.button {
-  font-weight: bold;
-  background-color: $button-enabled-light;
-  color: #ffffff;
-  padding: 10px 32px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition-duration: .2s;
-  background-color: blue;
-}
-
-.button:hover {
-  background-color: $button-hover-light;
-}
-
-.button:active {
-  background-color: $button-active-light;
-  transition-duration: 0.0s;
-}
-
-// Primary Button
-
-.button-primary {
-  background-color: $button-primary-enabled-light;
-  background-color: blue;
-}
-
-.button-primary:hover {
-  background-color: $button-primary-hover-light;
-}
-
-.button-primary:active {
-  background-color: $button-primary-active-light;
-  transition-duration: 0.0s;
-}
-
-.button:disabled,
-.button[disabled]{
-  background-color: $button-primary-disabled-light;
-  cursor: not-allowed;
-}
-
-// Dark
-// Basic Button
-
-.dark .button {
-  background-color: $button-enabled-dark;
-  background-color: blue;
-}
-
-.dark .button:hover {
-  background-color: $button-hover-dark;
-}
-
-.dark .button:active {
-  background-color: $button-active-dark;
-  transition-duration: 0.0s;
-}
-
-// Primary Button
-
-.dark .button-primary {
-  background-color: $button-primary-enabled-dark;
-  background-color: blue;
-}
-
-.dark .button-primary {
-  background-color: $button-primary-enabled-dark;
-}
-
-.dark .button-primary:hover {
-  background-color: $button-primary-hover-dark;
-}
-
-.dark .button-primary:active {
-  background-color: $button-primary-active-dark;
-}
-
-.dark .button:disabled,
-.dark .button[disabled]{
-  background-color: $button-primary-disabled-dark;
-  color: $dark-gray;
-}
-
 /*
  * =============================
  * --------- BUTTON ------------
@@ -302,7 +215,7 @@ nav {
   font-size: 1em;
 }
 
-.button2 {
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,7 +249,7 @@ nav {
     transition-duration: 0.0s;
   }  
 
-  &.button2-primary {
+  &.button-primary {
     background-color: $button-primary-enabled-light;
 
     .loader {
@@ -353,7 +266,7 @@ nav {
     }
   }
 
-  &.button2-image {
+  &.button-image {
     aspect-ratio: 1 / 1;
     padding: .2em;
 
@@ -380,7 +293,7 @@ nav {
 // Dark
 // Basic Button
 
-.dark .button2 {
+.dark .button {
   background-color: $button-enabled-dark;
 
   .loader {
@@ -397,7 +310,7 @@ nav {
     transition-duration: 0.0s;
   }
 
-  &.button2-primary {
+  &.button-primary {
     background-color: $button-primary-enabled-dark;
 
     &:hover {
@@ -447,105 +360,13 @@ nav {
 }
 
 
-/*
- * =============================
- * --------- Flex-Button -------
- * =============================
- */
-
-
-// .btn {
-//   width: 500px;
-// 	position: relative;
-// 	display: inline-flex;
-// 	flex: 0 0 auto;
-// 	flex-direction: row;
-// 	justify-content: center;
-// 	align-self: center;
-// 	// padding: 0 1.25rem;
-//   padding: 0 3em;
-
-// 	line-height: 2.125rem;
-// 	text-align: center;
-// 	margin: .125rem;
-	
-// 	border-radius: .125rem;
-// 	// border: 2px solid $green;
-// 	background-color: $green;
-// 	color: white;
-// 	text-decoration: none;
-// 	overflow: hidden;
-// 	cursor: pointer;
-//   vertical-align: middle;
-// 	outline: none;
-	
-// 	&:before {
-// 		background-color: white;
-// 		content: "";
-// 		display: flex;
-// 		transform: scale(1, 0);
-// 		transition: transform .25s ease;
-// 		transform-origin: 50% 100%;
-// 		position: absolute;
-// 		overflow: hidden;
-// 		border-radius: 1px;
-// 		top: 0;
-// 		left: 0;
-// 		right: 0;
-// 		bottom: 0;
-// 		//will-change: transform; //strange bug with right border
-// 		z-index: 0;
-// 	}
-	
-// 	span {
-// 		display: flex;
-// 		position: relative;
-// 		z-index: 1;
-// 	}
-	
-// 	.icon {
-// 		line-height: 2.125rem;
-// 		font-size: 1.25rem;
-// 		margin: 0 .25rem 0 -.25rem;
-// 	}
-	
-// 	&.block {
-// 		align-self: stretch;
-// 		width: 100%;
-// 		flex: 1 1 auto;
-// 	}
-// }
-
  /*
  * =============================
  * --------- FORM BOX ----------
  * =============================
  */
 
-
- .form-box {
-  display: flex;
-  flex-wrap: wrap;
-
-  width: 50%;
-  margin: 0 auto;
-  border-radius: 12px;
-  transition-duration: 0.4s;
-  background-color: $white-gray;
- }
-
- .form-box h1 {
-  width: 100%; 
-  text-align: center;
-  transition-duration: 0.4s;
- }
-
-
-.dark .form-box {
-  background-color: $division-gray;
-}
-
-.form-box2 {
+.form-box {
   display: flex;
   flex-wrap: wrap;
 
@@ -577,7 +398,7 @@ nav {
   }
 }
 
-.dark .form-box2 {
+.dark .form-box {
   background-color: $division-gray;
   border: 1.5px solid $darkest-gray;
 }
@@ -595,7 +416,7 @@ nav {
     width: 70%;
   }
 
-  .form-box2 {
+  .form-box {
     transition: width .2s;
     transition: background-color .4s;
     width: 60%;
@@ -614,7 +435,7 @@ nav {
     margin: 0 auto;
   }
 
-  .form-box2 {
+  .form-box {
     transition: width .2s;
     transition: background-color .4s;
     width: 100%;

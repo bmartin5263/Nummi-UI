@@ -92,7 +92,7 @@ function RegisterPage() {
         <Banner bannerType={BannerType.ERROR} omnipresent>
           {form.generalError}
         </Banner>
-        <form className='form-box2' onSubmit={form.submit}>
+        <form className='form-box' onSubmit={form.submit}>
           <h1>Register</h1>
           <RowBreak height=".8em"/>
           <TextField
