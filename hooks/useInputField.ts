@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { assert, isNotBlank } from "../util/assert"
-import { or } from "../util/utils"
+import { assert, isBlank, isNotBlank } from "../util/assert"
+import { capitalizeFirstLetter, or } from "../util/utils"
 import useLog from "./useLog"
 
 export type FieldTemplate = {
   name: string,
+  required: boolean,
   initialValue: string,
   shouldValidate: boolean,
   validator: (text: string) => string,
@@ -21,6 +22,8 @@ export type Field = {
   validate(): string
   enableValidations(): void
   setErrorMessage(text: string): void
+  setInErrorState(value: boolean): void
+  clearErrorState(): void
   insertValueIntoRequest: (req: any) => void
 }
 
@@ -37,9 +40,17 @@ function useInputField(props: FieldTemplate): Field {
   const insertValueIntoRequest: (req: any, value: string) => void = or(props.insertValueIntoRequest, (req) => req[props.name] = inputValue)
 
   const doValidate = (text: string): string => {
-    if (props.validator == null) {
+    if (props.required === true && (text == null || isBlank(text))) {
+      const message = capitalizeFirstLetter(props.name) + " is required";
+      setInErrorState(true);
+      setErrorMessage(message);
+      return message;
+    }
+    if (props.validator == null) {      
+      setInErrorState(false);
       return null;
     }
+
     const error: string = validator(text);
     if (error == null) {
       setInErrorState(false);
@@ -59,9 +70,7 @@ function useInputField(props: FieldTemplate): Field {
   }
 
   const doSetErrorMessage = (text: string) => {
-    log("setting error message to " + text);
     setErrorMessage(text);
-    setInErrorState(true);
   }
 
   return {
@@ -72,15 +81,16 @@ function useInputField(props: FieldTemplate): Field {
 
     update: (text) => doUpdate(text),
     validate: () => {
-      if (inErrorState) {
-        return errorMessage;
-      }
       return doValidate(inputValue);
     },
-    setErrorMessage: (text) => doSetErrorMessage(text),
+    clearErrorState: () => {
+      setInErrorState(false)
+;     setErrorMessage("");
+    },
+    setErrorMessage: (text: string) => doSetErrorMessage(text),
+    setInErrorState: (value: boolean) => setInErrorState(value),
     enableValidations: () => {
       setShouldValidate(true);
-      doValidate(inputValue);
     },
     insertValueIntoRequest: (req: any) => {
       insertValueIntoRequest(req, inputValue);

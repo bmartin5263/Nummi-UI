@@ -70,7 +70,11 @@ function RegisterPage() {
       if (passwordField.inputValue != retypedPasswordField.inputValue) {
         log("Passwords do not match")
         retypedPasswordField.setErrorMessage("Passwords do not match");
+        retypedPasswordField.setInErrorState(true);
         result.failed = true;
+      }
+      else {
+        retypedPasswordField.clearErrorState();
       }
     },
     onSubmit: (req) => nummiClient.post("register", req),

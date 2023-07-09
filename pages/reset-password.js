@@ -1,62 +1,120 @@
 import Head from 'next/head';
-import RowBreak from '../components/rowBreak';
-import nummiClient from '../util/nummiClient';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import Banner, { BannerType } from '../components/banner';
+import styles from 'styles/register.module.scss'
+import React, { useState } from 'react'
 import TextField from '../components/textField';
+import RowBreak from '../components/rowBreak';
+import Link from 'next/link';
+import Banner, { BannerType } from '../components/banner';
+import nummiClient from '../util/nummiClient';
+import { extractErrors, validateEmail } from '../util/utils';
+import { useRouter } from 'next/router';
+import useLog from '../hooks/useLog';
+import useInputField from '../hooks/useInputField'
+import useInputForm from '../hooks/useInputForm'
+import Button, { ButtonType } from '../components/button';
 import Loader from '../components/loader';
-import useInputForm from '../hooks/useInputForm';
-import { validateEmail } from '../util/utils';
-import Button from '../components/button';
 import Icon from '../components/icon';
 
-export default function ResetPassword() {
-  const [bannerType, setBannerType] = useState(BannerType.ERROR);
-  const [bannerMessage, setBannerMessage] = useState("");
+const log = useLog("ResetPasswordPage")
 
+function ResetPasswordPage() {
+  const router = useRouter();
+  const email = router.query.email;
+  const token = router.query.token;
   const form = useInputForm({
     fields: [
       {
-        name: "username",
-        validator: validateEmail
+        name: "password",
+        shouldValidate: true,
+        validator: (password) => {
+          if (password == null || password == undefined || password == "") {
+            return "Password is required";
+          }
+          else if (password.length < 8) {
+            return "Password must be at least 8 characters";
+          }
+          else if (password.toUpperCase() == password) {
+            return "Passwords must have at least one lowercase ('a'-'z')";
+          }
+          else if (password.toLowerCase() == password) {
+            return "Passwords must have at least one uppercase ('A'-'Z')";
+          }
+          else if (!/\d/.test(password)) {
+            return "Passwords must have at least one digit ('0'-'9')."
+          }
+          else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+            return "Passwords must have at least one special character."
+          }
+        }
+      },
+      {
+        name: "retypedPassword"
       }
     ],
-    onSubmit: async (data) => await nummiClient.post("/reset-password?usernameOrEmail=" + data.email, {}),
-    onSuccess: (res) => {
-      setBannerType(BannerType.SUCCESS);
-      setBannerMessage("Password reset email sent")
+    preSubmitValidation: (fields, result) => {
+      const passwordField = fields.get("password");
+      const retypedPasswordField = fields.get("retypedPassword");
+      if (passwordField.inputValue != retypedPasswordField.inputValue) {
+        log("Passwords do not match")
+        retypedPasswordField.setErrorMessage("Passwords do not match");
+        retypedPasswordField.setInErrorState(true);
+        result.failedFields.add(retypedPasswordField.name);
+      }
     },
-    defaultErrorMessage: "Unable to reset password. Please try again in a few minutes"
+    onSubmit: async (req) => {
+      return await nummiClient.post('/reset-password?token=' + token, {}, {
+        auth: {
+          username: email,
+          password: req.password,
+        }
+      });
+    },
+    onSuccess: (req, res) => {
+      router.push("/login?email=" + email + "&message=" + encodeURI("Password successfully reset! Please try logging in"))
+    },
+    fieldErrorExtractor: (res) => extractErrors(res)
   })
 
   return (
-      <>
-        <Head>
-          <title>Reset Password</title>
-        </Head>
-        <article>
-          <Banner bannerType={form.generalError != null ? BannerType.ERROR : BannerType.SUCCESS} omnipresent>
-            {form.generalError != null ? form.generalError : bannerMessage}
-          </Banner>
-          <form className='form-box'>
-            <h1>Reset Password</h1>
-            <RowBreak height=".8em"/>
-            <TextField
-              field={form.getField("username")}
-              placeholder='Username or Email'
-              title="Username or Email" 
-            />
-            <RowBreak height={"1.8em"}/>
-            <Button type="submit" className="button" style={{width: '100%'}} onClick={form.submit} disabled={form.submitted}>
-              {form.submitted 
+    <>
+      <Head>
+        <title>Register</title>
+      </Head>
+      <article>
+        <Banner bannerType={BannerType.ERROR} omnipresent>
+          {form.generalError}
+        </Banner>
+        <form className='form-box' onSubmit={form.submit}>
+          <h1>Reset Password</h1>
+          <RowBreak height=".8em"/>
+          <TextField
+            field={form.getField("password")}
+            placeholder='Password'
+            type='password'
+            title="Password" 
+            className={styles.textField}
+          />
+          <RowBreak height=".6em"/>
+          <TextField
+            field={form.getField("retypedPassword")}
+            placeholder='Retype Password'
+            type='password'
+            title="Retype Password" 
+            className={styles.textField}
+          />
+          <RowBreak height="1.8em"/>
+          <Button id={styles.registerButton} buttonType={ButtonType.PRIMARY} disabled={form.submitted} onClick={e => {
+            form.submit(e);
+          }}>
+            {form.submitted 
               ? <Loader/>
-              : <><Icon name='mail' left/>Send Reset Password Link</>
+              : <><Icon name='lock_reset' style={{'fontSize': '1.75em'}} left/>{"Reset Password"}</>
             }
-            </Button>
-            <RowBreak height={".6em"}/>
-          </form>
-        </article>
-      </>
+          </Button>
+        </form>
+      </article>
+    </>
   );
 }
+
+export default ResetPasswordPage

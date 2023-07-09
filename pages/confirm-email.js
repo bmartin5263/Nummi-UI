@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     })
     return {
       redirect: {
-        destination: '/login?email=' + encodeURI(query.email),
+        destination: '/login?email=' + encodeURI(query.email) + "&message=" + encodeURI("Email successfully confirmed! Please try logging in"),
         permanent: false
       }
     }

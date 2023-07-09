@@ -4,14 +4,15 @@ import { assert, isNotBlank } from "../util/assert";
 import { EventHandler, FormEvent, useState } from "react";
 import { Axios, AxiosResponse } from "axios";
 import useLog from "./useLog";
-import { isNotEmpty, or } from "../util/utils";
+import { extractErrors, isNotEmpty, or } from "../util/utils";
 import { useTimer } from "react-timer-hook";
 
 const log = useLog("InputForm");
 
 export type ValidationResult = {
   failed: boolean,
-  generalError: string
+  generalError: string,
+  failedFields: Set<string>
 }
 
 export type InputFormTemplate = {
@@ -44,7 +45,7 @@ function useInputForm(props: InputFormTemplate): InputForm {
   const [generalError, setGeneralError] = useState(null);
 
   const preSubmitValidation = or(props.preSubmitValidation, () => null)
-  const fieldErrorExtractor = or(props.fieldErrorExtractor, (res: AxiosResponse<any, any>) => []);
+  const fieldErrorExtractor = or(props.fieldErrorExtractor, (res) => extractErrors(res));
   const onSuccess = or(props.onSuccess, (req: any, res: AxiosResponse<any, any>) => {});
 
   const fields: Map<string, Field> = new Map();
@@ -56,19 +57,23 @@ function useInputForm(props: InputFormTemplate): InputForm {
   const doValidate = (): boolean => {
     let success = true;
 
-    const result: ValidationResult = {failed: false, generalError: null};
+    const result: ValidationResult = {failed: false, generalError: null, failedFields: new Set<string>()};
+
     preSubmitValidation(fields, result);
     if (result.generalError != null) {
       setGeneralError(result.generalError);
       success = false;
     }
-    if (result.failed) {
+    if (result.failed || result.failedFields.size > 0) {
       success = false;
     }
 
     for (const [name, field] of fields) {
-      if (field.validate() != null) {
-        success = false;
+      if (!result.failedFields.has(name)) {
+        if (field.inErrorState || field.validate() != null) {
+          field.enableValidations();
+          success = false;
+        }
       }
     }
 
@@ -113,6 +118,8 @@ function useInputForm(props: InputFormTemplate): InputForm {
           const field: Field = fields.get(fieldError.name)
           if (field != null) {
             field.setErrorMessage(fieldError.message);
+            field.setInErrorState(true);
+            field.enableValidations();
           }
           else {
             console.log(JSON.stringify(fieldError));

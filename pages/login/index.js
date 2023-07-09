@@ -23,6 +23,10 @@ function LoginPage({ csrfToken }) {
   if (email) {
     email = decodeURI(email);
   }
+  let message = searchParams.get('message');
+  if (message) {
+    message = decodeURI(message);
+  }
 
   const form = useInputForm({
     fields: [
@@ -49,8 +53,8 @@ function LoginPage({ csrfToken }) {
     // onSubmit: (req) => axiosClient.post("/api/auth/callback/credentials", req)
   })
 
-  const bannerText = email != null 
-    ? "Email successfully confirmed! Please try logging in" 
+  const bannerText = message != null 
+    ? message
     : error != null ? error : null;
   return (
     <>
@@ -58,7 +62,7 @@ function LoginPage({ csrfToken }) {
         <title>Login to Nummi</title>
       </Head>
       <article>
-        <Banner bannerType={email == null ? BannerType.ERROR : BannerType.INFO} omnipresent>
+        <Banner bannerType={email == null ? BannerType.ERROR : BannerType.SUCCESS} omnipresent>
           {bannerText}
         </Banner>
         <form className='form-box' method="post" action="/api/auth/callback/credentials">

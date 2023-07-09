@@ -30,6 +30,12 @@ function TextField(props: TextFieldProps) {
     width: '100%'
   } as const;
 
+  const noWrap = {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'flex-end'
+  } as const;
+
   const value = props.value ?? props.field.inputValue;
   const error = props.error ?? props.field.errorMessage;
   const showError = props.showError ?? props.field.inErrorState;
@@ -42,7 +48,10 @@ function TextField(props: TextFieldProps) {
       onChange = (newValue: string) => props.field.update(newValue);
     }
     if (props.onExit == null) {
-      onExit = () => props.field.enableValidations()
+      onExit = () => {
+        props.field.enableValidations();
+        props.field.validate();
+      }
     }
   }
 
@@ -61,9 +70,9 @@ function TextField(props: TextFieldProps) {
   log("render " + identifier)
   return (
     <div className={"textBox " + props.className}>
-      <div style={defaultStyle}>
-        <p className={getTitleClass(value)}>{props.title}</p>
-        <p className={getWarningClass(showError)}>{error}</p>
+      <div style={noWrap}>
+        <span className={getTitleClass(value)}>{props.title}</span>
+        <span className={getWarningClass(showError)}>{error}</span>
       </div>
       <div style={defaultStyle}>
         <input

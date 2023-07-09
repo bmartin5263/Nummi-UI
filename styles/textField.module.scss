@@ -10,7 +10,9 @@
 }
 
 .labelText {
+  display: inline-flex;
   color: $darkest-gray;
+  // background-color: blue;
 }
 
 :global(.dark) .labelText {
@@ -18,8 +20,11 @@
 }
 
 .errorText {
+  display: inline-flex;
   color: $red;
   margin-left: auto;
+  // background-color: green;
+  text-align: right;
   // width: 2px;
   // height: 2px;
   // background-color: red;
@@ -32,6 +37,7 @@
 .textBox {
   border-color: $dark-gray;
   width: 100%;
+  background-color: darkkhaki;
 }
 
 :global(.dark) .textBox {
@@ -49,4 +55,6 @@
 .headerTextHidden {
   top: .6em;
   opacity: 0%;
+  // width: 1px;
+  // height: 1em;
 }

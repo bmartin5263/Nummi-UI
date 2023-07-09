@@ -19,5 +19,9 @@ export function assertNotNull<T>(obj: T, name: string): T {
 }
 
 export function isNotBlank(text: string): boolean {
-  return text != null && text.trim().length > 0;
+  return !isBlank(text);
+}
+
+export function isBlank(text: string): boolean {
+  return text == null || text.trim().length == 0;
 }
