@@ -30,7 +30,7 @@ body.dark {
 
 .content {
   transition: width .3s;
-  width: 85%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -87,6 +87,7 @@ input {
   flex-wrap: wrap;
   // background-color: #660000;
   justify-content: flex-start;
+  height: 100%;
 }
 
 nav {
@@ -550,11 +551,12 @@ nav {
 
   width: 50%;
   margin: 0 auto;
-  padding: 1em 5em;
+  padding: 2em 5em;
   border-radius: 12px;
   transition-duration: 0.4s;
   background-color: $white-gray;
   column-gap: .8em;
+  border: 1.5px solid $light-gray;
 
   & h1 {
     width: 100%; 
@@ -577,6 +579,7 @@ nav {
 
 .dark .form-box2 {
   background-color: $division-gray;
+  border: 1.5px solid $darkest-gray;
 }
 
 @media screen and (max-width: 1200px) {

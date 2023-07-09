@@ -5,27 +5,23 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Banner, { BannerType } from '../components/banner';
 import TextField from '../components/textField';
+import Loader from '../components/loader';
+import useInputForm from '../hooks/useInputForm';
+import { validateEmail } from '../util/utils';
+import Button from '../components/button';
+import Icon from '../components/icon';
 
 export default function EmailConfirmationSent() {
-  const router = useRouter()
-  const [clicked, setClicked] = useState(false);
-  const [bannerError, setBannerError] = useState("");
-
-  const handleResendEmail = async (event) => {
-    event.preventDefault();
-    setClicked(true);
-
-    try {
-      const url = "/resend-confirmation-email?email=" + router.query.email;
-      await nummiClient.post(url, {});
-    }
-    catch (error) {
-      setBannerError(error.response?.data?.userMessage ?? "Unable to resend confirmation email");
-    }
-    finally {
-      setClicked(false);
-    }
-  }
+  const form = useInputForm({
+    fields: [
+      {
+        name: "email",
+        validator: validateEmail
+      }
+    ],
+    onSubmit: async (data) => await nummiClient.post("/resend-confirmation-email?email=" + data.email, {}),
+    defaultErrorMessage: "Unable to resend confirmation email"
+  })
 
   return (
       <>
@@ -34,12 +30,24 @@ export default function EmailConfirmationSent() {
         </Head>
         <article>
           <Banner bannerType={BannerType.ERROR} omnipresent>
+            {form.generalError}
           </Banner>
           <form className='form-box2'>
             <h1>Resend Confirmation Email</h1>
-            <TextField name="email" title="Email" type="email"/>
+            <RowBreak height=".8em"/>
+            <TextField
+              field={form.getField("email")}
+              placeholder='Email'
+              type='email'
+              title="Email" 
+            />
             <RowBreak height={"1.8em"}/>
-            <button type="submit" className="button button-primary">Resend Email</button>
+            <Button type="submit" className="button2 button2-primary" style={{width: '100%'}} onClick={form.submit} disabled={form.submitted}>
+              {form.submitted 
+              ? <Loader/>
+              : <><Icon name='mail' left/>Resend Email</>
+            }
+            </Button>
             <RowBreak height={".6em"}/>
           </form>
         </article>

@@ -3,6 +3,7 @@ import Layout from '../../components/layout';
 
 import React from 'react'
 import Banner from '../../components/banner';
+import Button from '../../components/button';
 
 function StrategiesPage() {
   return (
@@ -23,13 +24,13 @@ function StrategiesPage() {
               <td>Opportunist</td>
               <td>Nummi</td>
               <td>0</td>
-              <td><button className='button button-primary' style={{width: '100%'}}>Simulate</button></td>
+              <td><Button className='button2 button2-primary' style={{width: '100%'}}>Simulate</Button></td>
           </tr>
           <tr>
               <td>Mummy Dust</td>
               <td>Nummi</td>
               <td>3</td>
-              <td><button className='button button-primary' style={{width: '100%'}}>Simulate</button></td>
+              <td><Button className='button2 button2-primary' style={{width: '100%'}}>Simulate</Button></td>
           </tr>
         </table>
       </div>

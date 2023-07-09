@@ -8,7 +8,7 @@ import RowBreak from '../../components/rowBreak';
 import Link from 'next/link';
 import Banner, { BannerType } from '../../components/banner';
 import nummiClient from '../../util/nummiClient';
-import { extractErrors } from '../../util/utils';
+import { extractErrors, validateEmail } from '../../util/utils';
 import { useRouter } from 'next/router';
 import useLog from '../../hooks/useLog';
 import useInputField from '../../hooks/useInputField'
@@ -23,14 +23,7 @@ function RegisterPage() {
     fields: [
       {
         name: "email",
-        validator: (email) => {
-          if (email == null || email == undefined || email == "") {
-            return "Email is required";
-          }
-          else if (!email.includes("@") || !email.includes(".")) {
-            return "Not an Email Address";
-          }
-        }
+        validator: validateEmail
       },
       {
         name: "username",
@@ -71,11 +64,13 @@ function RegisterPage() {
         name: "retypedPassword"
       }
     ],
-    preSubmitValidation: (fields) => {
+    preSubmitValidation: (fields, result) => {
       const passwordField = fields.get("password");
       const retypedPasswordField = fields.get("retypedPassword");
       if (passwordField.inputValue != retypedPasswordField.inputValue) {
-        retypedPasswordField.setErrorMessage("Passwords do not match")
+        log("Passwords do not match")
+        retypedPasswordField.setErrorMessage("Passwords do not match");
+        result.failed = true;
       }
     },
     onSubmit: (req) => nummiClient.post("register", req),
@@ -85,6 +80,9 @@ function RegisterPage() {
     fieldErrorExtractor: (res) => extractErrors(res)
   })
 
+  const x = form.getField("retypedPassword").inErrorState;
+
+  log("render " + x)
   return (
     <>
       <Head>
@@ -122,6 +120,7 @@ function RegisterPage() {
           <RowBreak height=".6em"/>
           <TextField
             field={form.getField("retypedPassword")}
+            showError={x}
             placeholder='Retype Password'
             type='password'
             title="Retype Password" 

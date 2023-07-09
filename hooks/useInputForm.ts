@@ -4,15 +4,21 @@ import { assert, isNotBlank } from "../util/assert";
 import { EventHandler, FormEvent, useState } from "react";
 import { Axios, AxiosResponse } from "axios";
 import useLog from "./useLog";
-import { isNotEmpty } from "../util/utils";
+import { isNotEmpty, or } from "../util/utils";
+import { useTimer } from "react-timer-hook";
 
 const log = useLog("InputForm");
+
+export type ValidationResult = {
+  failed: boolean,
+  generalError: string
+}
 
 export type InputFormTemplate = {
   fields: FieldTemplate[],
   defaultErrorMessage: string,
 
-  preSubmitValidation: (fields: Map<string, Field>) => string;
+  preSubmitValidation: (fields: Map<string, Field>, result: ValidationResult) => void;
   onSubmit: (req: any) => Promise<AxiosResponse<any, any>>;
   onSuccess: (req: any, res: AxiosResponse<any, any>) => void;
   fieldErrorExtractor: (res: AxiosResponse<any, any>) => FieldError[]
@@ -37,17 +43,9 @@ function useInputForm(props: InputFormTemplate): InputForm {
   const [submitted, setSubmitted] = useState(false);
   const [generalError, setGeneralError] = useState(null);
 
-  const preSubmitValidation = props.preSubmitValidation != null 
-    ? props.preSubmitValidation 
-    : () => null;
-
-  const fieldErrorExtractor = props.fieldErrorExtractor != null
-    ? props.fieldErrorExtractor
-    : (res: AxiosResponse<any, any>) => []; 
-
-  const onSuccess = props.onSuccess != null
-    ? props.onSuccess
-    : (req: any, res: AxiosResponse<any, any>) => {}
+  const preSubmitValidation = or(props.preSubmitValidation, () => null)
+  const fieldErrorExtractor = or(props.fieldErrorExtractor, (res: AxiosResponse<any, any>) => []);
+  const onSuccess = or(props.onSuccess, (req: any, res: AxiosResponse<any, any>) => {});
 
   const fields: Map<string, Field> = new Map();
   for (const field of props.fields) {
@@ -58,9 +56,13 @@ function useInputForm(props: InputFormTemplate): InputForm {
   const doValidate = (): boolean => {
     let success = true;
 
-    const newGeneralError = preSubmitValidation(fields);
-    if (newGeneralError != null) {
-      setGeneralError(newGeneralError);
+    const result: ValidationResult = {failed: false, generalError: null};
+    preSubmitValidation(fields, result);
+    if (result.generalError != null) {
+      setGeneralError(result.generalError);
+      success = false;
+    }
+    if (result.failed) {
       success = false;
     }
 
@@ -84,7 +86,6 @@ function useInputForm(props: InputFormTemplate): InputForm {
     let success: boolean = doValidate();
 
     if (!success) {
-      event.preventDefault()
       return;
     }
     else if (props.onSubmit == null) {

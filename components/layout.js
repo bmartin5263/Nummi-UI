@@ -31,7 +31,7 @@ export default function Layout({ children }) {
       <div className="content">
         <div className='flex-content'>
           <Navigation />
-          <main style={{display: 'block', width: '100%'}}>
+          <main style={{display: 'block', width: '100%', height: '100%'}}>
             {children}
           </main>
           {/* <Footer/> */}

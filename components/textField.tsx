@@ -58,6 +58,7 @@ function TextField(props: TextFieldProps) {
     onExit();
   }
 
+  log("render " + identifier)
   return (
     <div className={"textBox " + props.className}>
       <div style={defaultStyle}>

@@ -18,6 +18,7 @@ function LoginPage({ csrfToken }) {
   const log = useLog('Login');
   const searchParams = useSearchParams(); 
   const error = searchParams.get('error');
+  const [clicked, setClicked] = useState(false);
   let email = searchParams.get('email');
   if (email) {
     email = decodeURI(email);
@@ -79,13 +80,16 @@ function LoginPage({ csrfToken }) {
             className={styles.textField} 
           />
           <RowBreak height={"1.8em"}/>
-          <Button id={styles.loginButton} type="submit" buttonType={ButtonType.PRIMARY} disabled={form.submitted} onClick={ e => {
+          <Button id={styles.loginButton} type="submit" buttonType={ButtonType.PRIMARY} disabled={clicked} onClick={ e => {
             if (!form.validate()) {
               e.preventDefault();
+              return e;
             }
-            return e
+            else {
+              return e
+            }
           }}>
-            {form.submitted 
+            {clicked
               ? <span style={{marginLeft: '.5em'}} className='loader'></span>
               : <>{"Login"}</>
             }

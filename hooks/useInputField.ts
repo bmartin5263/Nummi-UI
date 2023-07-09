@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { assert, isNotBlank } from "../util/assert"
+import { or } from "../util/utils"
+import useLog from "./useLog"
 
 export type FieldTemplate = {
   name: string,
@@ -24,18 +26,20 @@ export type Field = {
 
 function useInputField(props: FieldTemplate): Field {
   assert(isNotBlank(props.name), "Field name cannot be blank");
+  const log = useLog("useInputField(name=" + props.name + ")");
 
   const [inputValue, setInputValue] = useState(props.initialValue);
   const [errorMessage, setErrorMessage] = useState("");
   const [inErrorState, setInErrorState] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(props.shouldValidate == null ? false : true);
 
-  const validator: (text: string) => string = props.validator != null ? props.validator : (str: string) => null
-  const insertValueIntoRequest: (req: any, value: string) => void = props.insertValueIntoRequest != null
-    ? props.insertValueIntoRequest
-    : (req) => req[props.name] = inputValue
+  const validator: (text: string) => string = props.validator;
+  const insertValueIntoRequest: (req: any, value: string) => void = or(props.insertValueIntoRequest, (req) => req[props.name] = inputValue)
 
   const doValidate = (text: string): string => {
+    if (props.validator == null) {
+      return null;
+    }
     const error: string = validator(text);
     if (error == null) {
       setInErrorState(false);
@@ -55,6 +59,7 @@ function useInputField(props: FieldTemplate): Field {
   }
 
   const doSetErrorMessage = (text: string) => {
+    log("setting error message to " + text);
     setErrorMessage(text);
     setInErrorState(true);
   }

@@ -35,3 +35,16 @@ export function extractErrors(res: AxiosResponse<any, any>): FieldError[] {
     }
   }
 }
+
+export function or<T>(value: T, ifNull: T): T {
+  return value != null ? value : ifNull;
+}
+
+export function validateEmail(email) {
+  if (email == null || email == undefined || email == "") {
+    return "Email is required";
+  }
+  else if (!email.includes("@") || !email.includes(".")) {
+    return "Not an Email Address";
+  }
+}

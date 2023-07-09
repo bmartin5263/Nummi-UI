@@ -28,7 +28,7 @@ function Navigation() {
         {/* <div>
         </div> */}
         {!isAuthenticated && <Link href="/login" id={styles.loginButton} className='button2 button2-primary'>Login</Link>}
-        {isAuthenticated && <button className='button' id={styles.signOutButton} onClick={() => signOut()}>Sign Out</button>}
+        {isAuthenticated && <Button className='button2' id={styles.signOutButton} onClick={() => signOut()}>Sign Out</Button>}
         {!isAuthenticated && <Link href="/register" id={styles.registerButton} className='button2'>Register</Link>}
         <Button id={styles.toggleDarkModeButton} buttonType={ButtonType.BASIC} shape={ButtonShape.IMAGE} onClick={toggleDarkMode}>
           {darkMode ? <Icon>light_mode</Icon> : <Icon>dark_mode</Icon>}
