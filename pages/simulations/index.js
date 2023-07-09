@@ -1,12 +1,7 @@
 import Head from 'next/head';
-import Layout from '../../components/layout';
 
 import React from 'react'
 import Banner, { BannerType } from '../../components/banner';
-import LoginButton from '../../components/loginButton';
-import { getSession } from 'next-auth/react';
-import nummiClient from '../../util/nummiClient';
-import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import useLog from '../../hooks/useLog';
 import { getServerSession } from 'next-auth';
