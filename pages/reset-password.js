@@ -11,41 +11,47 @@ import { validateEmail } from '../util/utils';
 import Button from '../components/button';
 import Icon from '../components/icon';
 
-export default function EmailConfirmationSent() {
+export default function ResetPassword() {
+  const [bannerType, setBannerType] = useState(BannerType.ERROR);
+  const [bannerMessage, setBannerMessage] = useState("");
+
   const form = useInputForm({
     fields: [
       {
-        name: "email",
+        name: "username",
         validator: validateEmail
       }
     ],
-    onSubmit: async (data) => await nummiClient.post("/resend-confirmation-email?email=" + data.email, {}),
-    defaultErrorMessage: "Unable to resend confirmation email"
+    onSubmit: async (data) => await nummiClient.post("/reset-password?usernameOrEmail=" + data.email, {}),
+    onSuccess: (res) => {
+      setBannerType(BannerType.SUCCESS);
+      setBannerMessage("Password reset email sent")
+    },
+    defaultErrorMessage: "Unable to reset password. Please try again in a few minutes"
   })
 
   return (
       <>
         <Head>
-          <title>Resend Nummi Confirmation Email</title>
+          <title>Reset Password</title>
         </Head>
         <article>
-          <Banner bannerType={BannerType.ERROR} omnipresent>
-            {form.generalError}
+          <Banner bannerType={form.generalError != null ? BannerType.ERROR : BannerType.SUCCESS} omnipresent>
+            {form.generalError != null ? form.generalError : bannerMessage}
           </Banner>
           <form className='form-box'>
-            <h1>Resend Confirmation Email</h1>
+            <h1>Reset Password</h1>
             <RowBreak height=".8em"/>
             <TextField
-              field={form.getField("email")}
-              placeholder='Email'
-              type='email'
-              title="Email" 
+              field={form.getField("username")}
+              placeholder='Username or Email'
+              title="Username or Email" 
             />
             <RowBreak height={"1.8em"}/>
             <Button type="submit" className="button" style={{width: '100%'}} onClick={form.submit} disabled={form.submitted}>
               {form.submitted 
               ? <Loader/>
-              : <><Icon name='mail' left/>Resend Email</>
+              : <><Icon name='mail' left/>Send Reset Password Link</>
             }
             </Button>
             <RowBreak height={".6em"}/>

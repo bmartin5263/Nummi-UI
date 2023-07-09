@@ -33,6 +33,17 @@ body.dark {
   width: 80%;
   margin: 0 auto;
   padding-bottom: 3em;
+  background-color: darkblue;
+}
+
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+  // background-color: #660000;
+  justify-content: flex-start;
+  height: 100%;
+  padding-bottom: 3em;
+  background-color: darkred;
 }
 
 h1 {
@@ -81,14 +92,6 @@ input {
 .flex-wrapped {
   display: flex;
   flex-wrap: wrap;
-}
-
-.flex-content {
-  display: flex;
-  flex-wrap: wrap;
-  // background-color: #660000;
-  justify-content: flex-start;
-  height: 100%;
 }
 
 nav {
